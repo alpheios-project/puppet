@@ -7,7 +7,7 @@ class exist::build {
       ensure   => latest,
       revision => 'master',
       provider => git,
-      source   => 'https://github.com/alpheios-project/lex-docker',
+      source   => 'https://github.com/alpheios-project/lex-docker.git',
       notify  => Exec['remove-exist-image'],
   }
 
@@ -23,5 +23,6 @@ class exist::build {
     ensure     => present,
     docker_dir => $exist_build_dir,
     notify     => Docker::Run['lexsvc'],
+    force      => true,
   }
 }
