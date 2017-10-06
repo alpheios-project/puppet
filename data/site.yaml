@@ -9,7 +9,7 @@
     - 'balmas'
     - 'vagrant'
   sudoers:
-    - 'admin'
+    - 'balmas'
     - 'vagrant'
   site::ip_address: ''
   site::admin_email: 'bridget.almas@alpheios.net'
