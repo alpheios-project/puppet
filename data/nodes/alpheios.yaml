@@ -1,7 +1,3 @@
 ---
   classes:
-    - role::repos
-  users:
-    'icinga':
-      comment: 'Icinga user'
-      uid: '1101'
+    - role::www
