@@ -1,0 +1,20 @@
+---
+  classes:
+    - icinga::target
+    - profile::firewall
+    - profile::ntp
+    - profile::puppet
+    - profile::ssh
+    - profile::sudoers
+    - profile::timezone
+    - profile::users
+    - profile::vim
+  docker::manage_kernel: false
+  docker_run_dir: '/docker/run'
+  docker_build_dir: '/docker/build'
+  firewall_drop: false
+  icinga::version: '1.14.0'
+  icinga::contact: 'sysadmin'
+  icinga::key_contact: 'emergency'
+  pnp4nagios_url_base: 'http://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/'
+  pnp4nagios_version: '0.6.25'

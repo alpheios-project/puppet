@@ -1,0 +1,27 @@
+#!/bin/bash
+if [ "$#" -lt 2 ]; then
+  cat <<USAGE
+Usage: $0 PUPPET_REPO SSH_KEY TARGET HOSTNAME [GPGKEY]
+Install Puppet from PUPPET_REPO using SSH_KEY on the node TARGET (IP address or DNS name) and run 
+the bootstrap process. Set the hostname to HOSTNAME. Optionally add decryption key GPGKEY.
+USAGE
+  exit 1
+fi
+PUPPET_REPO=${1}
+IDENTITY="-i ${2}"
+TARGET=$3
+HOSTNAME=${4}
+BRANCH='master'
+KEYID=${5}
+OPTIONS="-oStrictHostKeyChecking=no"
+echo -n "Copying bootstrap script... "
+scp ${IDENTITY} ${OPTIONS} $(dirname $0)/bootstrap.sh ubuntu@${TARGET}:/tmp
+echo "done."
+if [ "$KEYID" -ne '' ]; then
+  echo -n "Copying decryption key..."
+  gpg --export-secret-subkeys --export-options export-reset-subkey-passwd -a ${KEYID} | ssh ${IDENTITY} ${OPTIONS} ubuntu@${TARGET} 'HOME=/root sudo gpg --import'
+  echo -n "done."
+fi
+echo -n "Bootstrapping... "
+ssh ${IDENTITY} ${OPTIONS} ubuntu@${TARGET} "sudo bash /tmp/bootstrap.sh ${PUPPET_REPO} ${HOSTNAME} ${BRANCH}"
+echo "done."
