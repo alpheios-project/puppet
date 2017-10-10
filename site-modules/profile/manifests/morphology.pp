@@ -1,10 +1,10 @@
 # Be the Morphology server
-class site::profiles::morphology {
-  include site::profiles::morphology::morpheus
-  include site::profiles::morphology::wordsxml
-  include site::profiles::python3
+class profile::morphology {
+  include profile::morphology::morpheus
+  include profile::morphology::wordsxml
+  include profile::python3
   class { 'redis': 
-    maxmemory        => '4gb'
+    maxmemory        => '4gb',
     maxmemory_policy => 'allkeys-lru',
   }
 
@@ -14,21 +14,25 @@ class site::profiles::morphology {
 
   vcsrepo { $app_root:
     ensure   => latest,
-    revision => 'v1.0.0'
+    revision => 'master',
     provider => git,
     source   => $repos,
   }
 
+  file { "/etc/gunicorn.d":
+    ensure => directory,
+  }
+
   file { "${app_root}/requirements.txt":
     ensure  => file,
-    source  => 'puppet:///modules/site/profiles/morphology/requirements.txt',
+    source  => 'puppet:///modules/profile/morphology/requirements.txt',
     require => Vcsrepo[$app_root],
     notify  => Python::Virtualenv[$app_root],
   }
 
   file { "${app_root}/morphsvc/production.cfg":
     ensure  => file,
-    content => epp('site/profiles/morphology/production.cfg.epp', {
+    content => epp('profile/morphology/production.cfg.epp', {
       'morpheus_path'         => hiera('morpheus::binary_path'),
       'morpheus_stemlib_path' => '/usr/local/morpheus/stemlib',
       'wordsxml_path'         => hiera('wordsxml::binary_path'),
@@ -40,7 +44,7 @@ class site::profiles::morphology {
 
   file { "${app_root}/app.py":
     ensure  => file,
-    content => epp('site/profiles/morphology/app.py.epp', {
+    content => epp('profile/morphology/app.py.epp', {
       'redis_host'  => $redis_host,
       'redis_port'  => '6379',
       'config_file' => 'production.cfg',
@@ -56,6 +60,7 @@ class site::profiles::morphology {
     venv_dir     => "${app_root}/venv",
     cwd          => $app_root,
     notify       => Exec['restart-morph-gunicorn'],
+    require      => File['/etc/gunicorn.d'],
   }
 
   python::gunicorn { 'morphology-vhost':

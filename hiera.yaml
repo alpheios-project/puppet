@@ -8,6 +8,8 @@ defaults:
 hierarchy:
   - name: 'Per-node data'
     path: "nodes/%{facts.hostname}.yaml"
+  - name: "OS-specific settings"
+    path: "%{facts.operatingsystem}.yaml"
   - name: "Per site secret data (encrypted)"
     lookup_key: eyaml_lookup_key
     path: "secret.eyaml"

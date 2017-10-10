@@ -1,6 +1,7 @@
 forge "http://forge.puppetlabs.com"
 
 # Modules from the Puppet Forge
+mod 'arioch/redis', '1.2.2'
 mod 'garethr/docker', '5.3.0'
 mod 'mayflower/php', '4.0.0-beta1'
 mod 'puppetlabs/accounts', '1.1.0'
@@ -16,4 +17,5 @@ mod 'puppetlabs/vcsrepo', '1.5.0'
 mod 'saz/sudo', '4.1.0'
 mod 'saz/timezone', '3.4.0'
 mod 'stahnma/epel', '1.2.2'
+mod 'stankevich/python', '1.18.2'
 mod 'stm/debconf', '2.0.0'

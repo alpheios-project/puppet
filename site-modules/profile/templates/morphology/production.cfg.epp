@@ -2,7 +2,7 @@
   String[1] $morpheus_path,
   String[2] $morpheus_stemlib_path,
   String[3] $aramorph_url,
-  String[4] $whitakers_path,
+  String[4] $wordsxml_path,
 | -%>
 ENGINES = "morpheusgrc,aramorph,whitakerLat,wleg,mgrcleg,hazm"
 ENGINES_MORPHEUSGRC_CNAME = "morphsvc.lib.engines.MorpheusLocalEngine.MorpheusLocalEngine"
@@ -17,7 +17,7 @@ PARSERS_MORPHEUS_URI = "org.perseus:tools:morpheus.v1"
 PARSERS_ARAMORPH_URI = "net.alpheios:tools:aramorph.v2"
 PARSERS_ARAMORPH_REMOTE_URL = "<%= $aramorph_url %>"
 PARSERS_WHITAKERS_URI = "net.alpheios:tools:wordsxml.v1"
-PARSERS_WHITAKERS_PATH = "<%= $whitakers_path %>"
+PARSERS_WHITAKERS_PATH = "<%= $wordsxml_path %>"
 PARSERS_HAZM_URI = "org.PersDigUMD:tools.hazm.v2"
 SERVICES_LEXICAL_ENTITY_SVC_GRC = None
 SERVICES_LEXICAL_ENTITY_SVC_LAT = None
