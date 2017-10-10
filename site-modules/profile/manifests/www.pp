@@ -9,9 +9,9 @@ class profile::www {
      source   => 'https://github.com/alpheios-project/landing-page.git'
    }
 
-   apache::vhost { 'www.melampus.org':
+   apache::vhost { 'www.alpheios.net':
      port          => '80',
-     serveraliases => [ 'melampus.org','dev.alpheios.net'],
+     serveraliases => [ 'alpheios.net','www.melampus.org','melampus.org'],
      docroot       => '/var/www/landing-page/build',
      proxy_pass    =>   [ 
        { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
