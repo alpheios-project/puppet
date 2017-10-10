@@ -1,0 +1,6 @@
+morpheus::binary_path: '/usr/local/morpheus/dist/bin/platform/Linux_x86-gcc4/morpheus'
+wordsxml::binary_path: '/usr/local/wordsxml/dist/Linux_x86-gcc4/wordsxml'
+wordsxml::deps:
+    - 'libc6-amd64'
+
+
