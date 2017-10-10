@@ -17,6 +17,7 @@ class profile::morphology {
     revision => 'master',
     provider => git,
     source   => $repos,
+    notify  => Python::Virtualenv[$app_root],
   }
 
   file { "/etc/gunicorn.d":
@@ -34,7 +35,7 @@ class profile::morphology {
     ensure  => file,
     content => epp('profile/morphology/production.cfg.epp', {
       'morpheus_path'         => hiera('morpheus::binary_path'),
-      'morpheus_stemlib_path' => '/usr/local/morpheus/stemlib',
+      'morpheus_stemlib_path' => '/usr/local/morpheus/dist/stemlib',
       'wordsxml_path'         => hiera('wordsxml::binary_path'),
       'aramorph_url'          => 'http://alpheios.net/perl/aramorph-test?word=',
     }),
@@ -81,7 +82,7 @@ class profile::morphology {
   }
 
   $proxy_pass = {
-    'path'    => '/',
+    'path'    => '/api/v1',
     'url'     => 'http://localhost:5000/',
   }
 
@@ -94,7 +95,11 @@ class profile::morphology {
     servername => 'morph.alpheios.net',
     port       => '80',
     docroot    => '/var/www/vhost',
-    proxy_pass => [$proxy_pass],
+    proxy_pass => [ $proxy_pass ],
+    rewrites   => [ 
+      {'rewrite_rule' => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
+      {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
+    ],
     headers    => $headers,
   }
 
