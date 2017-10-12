@@ -20,7 +20,7 @@ class profile::www {
        { 'path'    => '/alpheios-demos', 'url' => 'http://archive.alpheios.net/alpheios-demos' },
        { 'path'    =>  '/poetry', 'url' => 'http://archive.alpheios.net/poetry'},
        { 'path'    =>  '/perl/latin', 'url' => 'http://morph.alpheios.net/legacy/latin' },
-       { 'path'    =>  '/perl/greek', 'url' => 'http://morph.alpheios.net/legacy/greek' },
+       { 'path'    =>  '/perl/greek', 'url' => 'http://archive.alpheios.net/perl/greek' },
        { 'path'    =>  '/perl/aramorph2', 'url' => 'http://archive.alpheios.net/perl/aramorph2' },
        { 'path'    =>  '/xpi-install', 'url' => 'http://archive.alpheios.net/xpi-install' },
        { 'path'    =>  '/xpi-updates', 'url' => 'http://archive.alpheios.net/xpi-updates' },
