@@ -38,7 +38,7 @@ class profile::morphology {
       'morpheus_path'         => hiera('morpheus::binary_path'),
       'morpheus_stemlib_path' => '/usr/local/morpheus/dist/stemlib',
       'wordsxml_path'         => hiera('wordsxml::binary_path'),
-      'aramorph_url'          => 'http://localhost:8088/perl/aramorph-test?word=',
+      'aramorph_url'          => 'http://localhost:8088/perl/aramorph2?word=',
     }),
     require => Vcsrepo[$app_root],
     notify  => Python::Virtualenv[$app_root],
@@ -100,6 +100,7 @@ class profile::morphology {
     rewrites   => [ 
       {'rewrite_rule' => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
       {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
+      {'rewrite_rule' => [ '/legacy/aramorph2 http://localhost:5000/analysis/word?lang=ara&engine=amleg [P,L,QSA]']},
     ],
     headers    => $headers,
   }

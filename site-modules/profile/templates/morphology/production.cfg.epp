@@ -4,10 +4,11 @@
   String[3] $aramorph_url,
   String[4] $wordsxml_path,
 | -%>
-ENGINES = "morpheusgrc,aramorph,whitakerLat,wleg,mgrcleg,hazm"
+ENGINES = "morpheusgrc,aramorph,whitakerLat,wleg,mgrcleg,hazm,amleg"
 ENGINES_MORPHEUSGRC_CNAME = "morphsvc.lib.engines.MorpheusLocalEngine.MorpheusLocalEngine"
 ENGINES_MGRCLEG_CNAME = "morphsvc.lib.engines.MorpheusLegacyLocalEngine.MorpheusLegacyLocalEngine"
 ENGINES_ARAMORPH_CNAME = "morphsvc.lib.engines.AramorphRemoteEngine.AramorphRemoteEngine"
+ENGINES_AMLEG_CNAME = "morphsvc.lib.engines.AramorphLegacyRemoteEngine.AramorphLegacyRemoteEngine"
 ENGINES_WHITAKERLAT_CNAME = "morphsvc.lib.engines.WhitakersLocalEngine.WhitakersLocalEngine"
 ENGINES_WLEG_CNAME = "morphsvc.lib.engines.WhitakersLegacyLocalEngine.WhitakersLegacyLocalEngine"
 ENGINES_HAZM_CNAME = "morphsvc.lib.engines.HazmEngine.HazmEngine"
