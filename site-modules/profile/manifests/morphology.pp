@@ -2,6 +2,7 @@
 class profile::morphology {
   include profile::morphology::morpheus
   include profile::morphology::wordsxml
+  include profile::morphology::aramorph
   include profile::python3
   class { 'redis': 
     maxmemory        => '4gb',
@@ -37,7 +38,7 @@ class profile::morphology {
       'morpheus_path'         => hiera('morpheus::binary_path'),
       'morpheus_stemlib_path' => '/usr/local/morpheus/dist/stemlib',
       'wordsxml_path'         => hiera('wordsxml::binary_path'),
-      'aramorph_url'          => 'http://alpheios.net/perl/aramorph-test?word=',
+      'aramorph_url'          => 'http://localhost:8088/perl/aramorph-test?word=',
     }),
     require => Vcsrepo[$app_root],
     notify  => Python::Virtualenv[$app_root],
