@@ -3,7 +3,7 @@ class profile::morphology::aramorph {
   $docker_build_dir = lookup('docker_build_dir', String)
   $build_dir = "${docker_build_dir}/aramorph"
 
-  $password = lookup('bama2_repo_password')
+  $password = lookup('bama2_repo_password', String)
 
   vcsrepo { $build_dir:
     ensure   => latest,
