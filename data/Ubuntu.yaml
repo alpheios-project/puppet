@@ -1,6 +1,8 @@
 morpheus::binary_path: '/usr/local/morpheus/dist/bin/platform/Linux_x86-gcc4/morpheus'
 wordsxml::binary_path: '/usr/local/wordsxml/dist/Linux_x86-gcc4/wordsxml'
 wordsxml::deps:
-    - 'libc6-amd64'
-
+    - 'libc6'
+    - 'libc6-i386'
+    - 'gcc-multilib'
+python3_mod_wsgi: 'libapache2-mod-wsgi-py3'
 

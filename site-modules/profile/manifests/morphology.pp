@@ -1,10 +1,11 @@
 # Be the Morphology server
-class site::profiles::morphology {
-  include site::profiles::morphology::morpheus
-  include site::profiles::morphology::wordsxml
-  include site::profiles::python3
+class profile::morphology {
+  include profile::morphology::morpheus
+  include profile::morphology::wordsxml
+  include profile::morphology::aramorph
+  include profile::python3
   class { 'redis': 
-    maxmemory        => '4gb'
+    maxmemory        => '4gb',
     maxmemory_policy => 'allkeys-lru',
   }
 
@@ -14,25 +15,30 @@ class site::profiles::morphology {
 
   vcsrepo { $app_root:
     ensure   => latest,
-    revision => 'v1.0.0'
+    revision => 'master',
     provider => git,
     source   => $repos,
+    notify  => Python::Virtualenv[$app_root],
+  }
+
+  file { "/etc/gunicorn.d":
+    ensure => directory,
   }
 
   file { "${app_root}/requirements.txt":
     ensure  => file,
-    source  => 'puppet:///modules/site/profiles/morphology/requirements.txt',
+    source  => 'puppet:///modules/profile/morphology/requirements.txt',
     require => Vcsrepo[$app_root],
     notify  => Python::Virtualenv[$app_root],
   }
 
   file { "${app_root}/morphsvc/production.cfg":
     ensure  => file,
-    content => epp('site/profiles/morphology/production.cfg.epp', {
+    content => epp('profile/morphology/production.cfg.epp', {
       'morpheus_path'         => hiera('morpheus::binary_path'),
-      'morpheus_stemlib_path' => '/usr/local/morpheus/stemlib',
+      'morpheus_stemlib_path' => '/usr/local/morpheus/dist/stemlib',
       'wordsxml_path'         => hiera('wordsxml::binary_path'),
-      'aramorph_url'          => 'http://alpheios.net/perl/aramorph-test?word=',
+      'aramorph_url'          => 'http://localhost:8088/perl/aramorph2?word=',
     }),
     require => Vcsrepo[$app_root],
     notify  => Python::Virtualenv[$app_root],
@@ -40,7 +46,7 @@ class site::profiles::morphology {
 
   file { "${app_root}/app.py":
     ensure  => file,
-    content => epp('site/profiles/morphology/app.py.epp', {
+    content => epp('profile/morphology/app.py.epp', {
       'redis_host'  => $redis_host,
       'redis_port'  => '6379',
       'config_file' => 'production.cfg',
@@ -56,6 +62,7 @@ class site::profiles::morphology {
     venv_dir     => "${app_root}/venv",
     cwd          => $app_root,
     notify       => Exec['restart-morph-gunicorn'],
+    require      => File['/etc/gunicorn.d'],
   }
 
   python::gunicorn { 'morphology-vhost':
@@ -76,7 +83,7 @@ class site::profiles::morphology {
   }
 
   $proxy_pass = {
-    'path'    => '/',
+    'path'    => '/api/v1',
     'url'     => 'http://localhost:5000/',
   }
 
@@ -89,7 +96,12 @@ class site::profiles::morphology {
     servername => 'morph.alpheios.net',
     port       => '80',
     docroot    => '/var/www/vhost',
-    proxy_pass => [$proxy_pass],
+    proxy_pass => [ $proxy_pass ],
+    rewrites   => [ 
+      {'rewrite_rule' => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
+      {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
+      {'rewrite_rule' => [ '/legacy/aramorph2 http://localhost:5000/analysis/word?lang=ara&engine=amleg [P,L,QSA]']},
+    ],
     headers    => $headers,
   }
 

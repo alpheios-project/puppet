@@ -1,5 +1,5 @@
 # Install Python 3
-class site::profiles::python3 {
+class profile::python3 {
   include apache
   class { 'python':
     version    => 'python3.5',
