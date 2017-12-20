@@ -22,7 +22,7 @@ class profile::exist::server {
       {'rewrite_rule' => [ '/exist/rest/db/xq/alpheios-text.xq http://repos-archive.alpheios.net/exist/rest/db/xq/alpheios-text.xq']},
       {'rewrite_rule' => [ '/exist/rest/db/xq/alpheios-get-ref.xq http://repos-archive.alpheios.net/exist/rest/db/xq/alpheios-get-ref.xq']},
       {'rewrite_rule' => [ '/exist/rest/db/xq/alpheios-get-toc.xq http://repos-archive.alpheios.net/exist/rest/db/xq/alpheios-get-toc.xq']},
-      {'rewrite_rule' => [ '/exist/rest/db/app/(.*)$ http://repos-archive.alpheios.net/exist/rest/db/app/$1']},
+      {'rewrite_rule' => [ '/exist/rest/db/app/(.*)$ http://tools.alpheios.net/exist/rest/db/app/$1']},
     ],
     headers    => $headers,
 

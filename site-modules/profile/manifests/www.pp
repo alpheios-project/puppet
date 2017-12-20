@@ -9,6 +9,13 @@ class profile::www {
      source   => 'https://github.com/alpheios-project/landing-page.git'
    }
 
+   vcsrepo { '/var/www/demos':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/demos.git'
+   }
+
    apache::vhost { 'www.alpheios.net':
      port          => '80',
      serveraliases => [ 'alpheios.net','www.melampus.org','melampus.org'],
@@ -17,7 +24,6 @@ class profile::www {
        { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
        { 'path'    => '/sites', 'url' => 'http://archive.alpheios.net/sites'},
        { 'path'    => '/alpheios-texts', 'url' => 'http://archive.alpheios.net/alpheios-texts' },
-       { 'path'    => '/alpheios-demos', 'url' => 'http://archive.alpheios.net/alpheios-demos' },
        { 'path'    =>  '/poetry', 'url' => 'http://archive.alpheios.net/poetry'},
        { 'path'    =>  '/perl/latin', 'url' => 'http://morph.alpheios.net/legacy/latin' },
        { 'path'    =>  '/perl/greek', 'url' => 'http://morph.alpheios.net/legacy/greek' },
@@ -25,5 +31,10 @@ class profile::www {
        { 'path'    =>  '/xpi-install', 'url' => 'http://archive.alpheios.net/xpi-install' },
        { 'path'    =>  '/xpi-updates', 'url' => 'http://archive.alpheios.net/xpi-updates' },
      ],
+     aliases   => [
+       { alias => '/alpheios-demos',
+         path  => '/var/www/demos',
+       }
+     ]
    }
 }
