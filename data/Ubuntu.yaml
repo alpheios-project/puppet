@@ -5,4 +5,18 @@ wordsxml::deps:
     - 'libc6-i386'
     - 'gcc-multilib'
 python3_mod_wsgi: 'libapache2-mod-wsgi-py3'
+capitains::deps: 
+    - 'gcc'
+    - 'zlib1g'
+    - 'zlib1g-dev'
+    - 'linux-headers-generic'
+    - 'libxml2'
+    - 'libxml2-dev'
+    - 'libxslt1.1'
+    - 'libxslt1-dev'
+    - 'musl'
+    - 'musl-dev'
+    - 'unzip'
+    - 'curl'
+
 
