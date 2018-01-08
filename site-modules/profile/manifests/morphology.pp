@@ -105,9 +105,26 @@ class profile::morphology {
     headers    => $headers,
   }
 
+  apache::vhost { 'morphology-ssl':
+    servername => 'morph.alpheios.net',
+    port       => '443',
+    docroot    => '/var/www/vhost',
+    proxy_pass => [ $proxy_pass ],
+    rewrites   => [ 
+      {'rewrite_rule' => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
+      {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
+      {'rewrite_rule' => [ '/legacy/aramorph2 http://localhost:5000/analysis/word?lang=ara&engine=amleg [P,L,QSA]']},
+    ],
+    headers    => $headers,
+    ssl        => true,
+    ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
+    ssl_key    => '/etc/ssl/private/Alpheios.key',
+    ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
+  }
+
   firewall { '100 Morphology Service Access':
     proto  => 'tcp',
-    dport  => ['80'],
+    dport  => ['80','443'],
     action => 'accept',
   }
 
