@@ -1,5 +1,9 @@
 class profile::ssl {
 
+  file {'/root/.gnupg':
+    ensure => directory,
+  }
+
   file { '/etc/ssl/certs/ca-bundle-client.crt':
     content => lookup('ssl_chain'),
   }

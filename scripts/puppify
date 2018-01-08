@@ -12,14 +12,14 @@ IDENTITY="-i ${2}"
 TARGET=$3
 HOSTNAME=${4}
 BRANCH='master'
-KEYID=${5}
+GPGKEY=${5}
 OPTIONS="-oStrictHostKeyChecking=no"
 echo -n "Copying bootstrap script... "
 scp ${IDENTITY} ${OPTIONS} $(dirname $0)/bootstrap.sh ubuntu@${TARGET}:/tmp
 echo "done."
 if [ "$KEYID" -ne '' ]; then
   echo -n "Copying decryption key..."
-  gpg --export-secret-subkeys --export-options export-reset-subkey-passwd -a ${KEYID} | ssh ${IDENTITY} ${OPTIONS} ubuntu@${TARGET} 'HOME=/root sudo gpg --import'
+  cat ${GPGKEY} | ssh ${IDENTITY} ${OPTIONS} ubuntu@${TARGET} 'HOME=/root sudo gpg --import'
   echo -n "done."
 fi
 echo -n "Bootstrapping... "

@@ -1,0 +1,1 @@
+cat gpgkey | ssh 050D9D07 -oStrictHostKeyChecking=no servername 'HOME=/root sudo gpg --import'
