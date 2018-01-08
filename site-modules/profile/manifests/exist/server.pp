@@ -26,6 +26,11 @@ class profile::exist::server {
       {'rewrite_rule' => [ '/exist/rest/db/app/(.*)$ http://tools.alpheios.net/exist/rest/db/app/$1']},
     ],
     headers    => $headers,
+    aliases   => [
+      { alias => '/lexdata',
+        path  => '/usr/local/lexdata',
+      }
+    ],
 
   }
   
@@ -45,6 +50,11 @@ class profile::exist::server {
     ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
     ssl_key    => '/etc/ssl/private/Alpheios.key',
     ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
+    aliases   => [
+      { alias => '/lexdata',
+        path  => '/usr/local/lexdata',
+      }
+    ],
 
   }
 
