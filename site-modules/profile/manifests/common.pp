@@ -7,5 +7,4 @@ class profile::common {
   include profile::timezone
   include profile::users
   include profile::vim
-  include profile::ssl
 }

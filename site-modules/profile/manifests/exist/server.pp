@@ -3,6 +3,7 @@ class profile::exist::server {
   include apache
   include profile::docker::runner
   include exist::server
+  include profile::ssl
 
   $proxy_pass = {
     'path'    => '/exist/',

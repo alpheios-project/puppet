@@ -1,5 +1,6 @@
 # Be the Morphology server
 class profile::morphology {
+  include profile::ssl
   include profile::morphology::morpheus
   include profile::morphology::wordsxml
   include profile::morphology::aramorph

@@ -1,4 +1,5 @@
 class profile::www {
+  include profile::ssl
 
   class { 'apache': }
 
