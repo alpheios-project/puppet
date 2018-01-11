@@ -3,4 +3,5 @@ class role::repos {
   include profile::common
   include profile::exist::build
   include profile::exist::server
+  include profile::lexdata
 }
