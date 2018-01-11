@@ -17,7 +17,7 @@ OPTIONS="-oStrictHostKeyChecking=no"
 echo -n "Copying bootstrap script... "
 scp ${IDENTITY} ${OPTIONS} $(dirname $0)/bootstrap.sh ubuntu@${TARGET}:/tmp
 echo "done."
-if [ "$KEYID" -ne '' ]; then
+if [ "$GPGKEY" -ne '' ]; then
   echo -n "Copying decryption key..."
   cat ${GPGKEY} | ssh ${IDENTITY} ${OPTIONS} ubuntu@${TARGET} 'HOME=/root sudo gpg --import'
   echo -n "done."
