@@ -26,6 +26,11 @@ class profile::puppet {
     }
   }
 
+  file_line { 'disable reports':
+    path  => '/etc/puppetlabs/puppet/puppet.conf',
+    line  => 'report = false',
+  }
+
   file { '/tmp/puppet.lastrun':
     content => strftime('%F %T'),
     backup  => false,
