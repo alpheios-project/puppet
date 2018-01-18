@@ -9,12 +9,22 @@ class profile::grammars {
      source   => 'https://github.com/alpheios-project/grammar-bennett.git'
    }
 
+   vcsrepo { '/var/www/grammar-smyth':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/grammar-smyth.git'
+   }
+
    apache::vhost { 'grammars.alpheios.net':
      port          => '80',
      docroot       => '/var/www/html',
      aliases   => [
        { alias => '/bennett',
          path  => '/var/www/grammar-bennett',
+       },
+       { alias => '/smyth',
+         path  => '/var/www/grammar-smyth',
        },
      ],
    }
@@ -25,6 +35,9 @@ class profile::grammars {
      aliases   => [
        { alias => '/bennett',
          path  => '/var/www/grammar-bennett',
+       },
+       { alias => '/smyth',
+         path  => '/var/www/grammar-smyth',
        },
      ],
      ssl        => true,
