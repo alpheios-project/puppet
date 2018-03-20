@@ -16,9 +16,15 @@ class profile::grammars {
      source   => 'https://github.com/alpheios-project/grammar-smyth.git'
    }
 
+  $headers = [
+      "set Access-Control-Allow-Origin '*'",
+      "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'"
+  ]
+
    apache::vhost { 'grammars.alpheios.net':
      port          => '80',
      docroot       => '/var/www/html',
+     headers    => $headers,
      aliases   => [
        { alias => '/bennett',
          path  => '/var/www/grammar-bennett',
@@ -32,6 +38,7 @@ class profile::grammars {
    apache::vhost { 'ssl-grammars':
      port          => '443',
      docroot       => '/var/www/html',
+     headers    => $headers,
      aliases   => [
        { alias => '/bennett',
          path  => '/var/www/grammar-bennett',
