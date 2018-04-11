@@ -2,6 +2,7 @@ forge "http://forge.puppetlabs.com"
 
 # Modules from the Puppet Forge
 mod 'arioch/redis', '1.2.2'
+mod 'artberri/nvm', '1.1.1'
 mod 'garethr/docker', '5.3.0'
 mod 'mayflower/php', '4.0.0-beta1'
 mod 'puppetlabs/accounts', '1.1.0'
