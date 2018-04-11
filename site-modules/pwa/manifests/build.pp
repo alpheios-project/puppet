@@ -40,13 +40,9 @@ class pwa::build {
     owner  => $pwa_user,
   }
 
-  file { "${pwa_build_dir}/docker-nginx-config/certs/ca-bundle-client.crt":
-    content => lookup('ssl_chain'),
-    require => File["${pwa_build_dir}/docker-nginx-config/certs"],
-  }
 
-  file { "${pwa_build_dir}/docker-nginx-config/certs/STAR_alpheios.net.crt":
-    content => lookup('ssl_cert'),
+  file { "${pwa_build_dir}/docker-nginx-config/certs/STAR_alpheios.net_chained.crt":
+    content => lookup('ssl_cert_chained'),
     require => File["${pwa_build_dir}/docker-nginx-config/certs"],
   }
 

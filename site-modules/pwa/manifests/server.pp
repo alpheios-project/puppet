@@ -16,8 +16,8 @@ class pwa::server {
     ensure  => present,
     image   => "pwa:latest",
     ports   => [
-      "8020:80",
-      "8120:443",
+      "80:80",
+      "443:443",
     ],
     volumes => [ 
       "${pwa_build_dir}/dist:/usr/share/nginx/html",
@@ -28,7 +28,7 @@ class pwa::server {
 
   firewall { '100 Allow web traffic for pwa':
     proto  => 'tcp',
-    dport  => [8020,8120],
+    dport  => [80,443],
     action => 'accept',
   }
 
