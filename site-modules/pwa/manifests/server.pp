@@ -1,6 +1,5 @@
 # Run the  Server container
 class pwa::server {
-  include apache 
 
   $docker_run_dir = lookup('docker_run_dir', String)
   $docker_build_dir = lookup('docker_build_dir', String)
