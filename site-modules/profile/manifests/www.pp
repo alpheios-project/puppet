@@ -24,6 +24,13 @@ class profile::www {
      source   => 'https://github.com/alpheios-project/enhanced-texts-v1.git'
    }
 
+   vcsrepo { '/var/www/Gardener':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/Gardener.git'
+   }
+
    apache::vhost { 'www.alpheios.net':
      port          => '80',
      serveraliases => [ 'alpheios.net','www.melampus.org','melampus.org'],
@@ -44,8 +51,15 @@ class profile::www {
        },
        { alias => '/alpheios-texts',
          path  => '/var/www/enhanced-texts-v1',
+       },
+       { alias => '/alpheios-treebanks',
+         path  => '/var/www/Gardener/docs',
+       },
+       { alias => '/alpheios-treebanks/xml',
+         path  => '/var/www/Gardener/docs/xml',
        }
-     ]
+     ],
+     allow_encoded_slashes => 'on',
    }
 
    apache::vhost { 'ssl-alpheios':
