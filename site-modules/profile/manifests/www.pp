@@ -31,6 +31,13 @@ class profile::www {
      source   => 'https://github.com/alpheios-project/Gardener.git'
    }
 
+   vcsrepo { '/var/www/demo-paideia':
+     ensure   => latest,
+     revision => 'paideia',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/embed-lib.git'
+   }
+
    apache::vhost { 'www.alpheios.net':
      port          => '80',
      serveraliases => [ 'alpheios.net','www.melampus.org','melampus.org'],
@@ -55,9 +62,9 @@ class profile::www {
        { alias => '/alpheios-treebanks',
          path  => '/var/www/Gardener/docs',
        },
-       { alias => '/alpheios-treebanks/xml',
-         path  => '/var/www/Gardener/docs/xml',
-       }
+       { alias => '/demo-paideia',
+         path  => '/var/www/demo-paideia',
+       },
      ],
      allow_encoded_slashes => 'on',
    }
@@ -82,8 +89,12 @@ class profile::www {
        },
        { alias => '/alpheios-texts',
          path  => '/var/www/enhanced-texts-v1',
+       },
+       { alias => '/alpheios-treebanks',
+         path  => '/var/www/Gardener/docs',
        }
      ],
+     allow_encoded_slashes => 'on',
      ssl        => true,
      ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
      ssl_key    => '/etc/ssl/private/Alpheios.key',
