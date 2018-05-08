@@ -40,6 +40,12 @@ class capitains($www_root,
     content => template('capitains/hookclean.py.erb'),
   }
 
+  file { "${app_root}/install-dev.sh":
+    content => template('capitains/install-dev.sh.erb'),
+    mode    => "0755",
+    notify => Python::Virtualenv[$app_root],
+  }
+
   file { "${app_root}/requirements.txt":
     content => template('capitains/requirements.txt.erb'),
     require    => Vcsrepo[$app_root],
@@ -54,7 +60,14 @@ class capitains($www_root,
     requirements => "${capitains::app_root}/requirements.txt",
     venv_dir     => $capitains::venvdir,
     cwd          => $capitains::app_root,
-    notify       => Exec['restart-gunicorn'],
+    notify       => Exec['build-capitains-dev'],
+  }
+
+  exec { 'build-capitains-dev':
+    cwd     => $capitains::app_root,
+    notify  => Exec['restart-gunicorn'],
+    command => "${app_root}/install-dev.sh",
+    require => Python::Virtualenv[$capitains::app_root],
   }
 
   python::gunicorn { 'vhost':
