@@ -1,6 +1,6 @@
 #!/bin/bash
 source ~/.nvm/nvm.sh
-nvm use 8.7.0
+nvm use 9.10.1
 npm install     
-npm run build-dev
+npm run build-node-dev
 

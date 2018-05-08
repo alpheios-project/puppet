@@ -6,7 +6,7 @@ class pwa::build {
 
   class { 'nvm':
     user         => $pwa_user,
-    install_node => '8.7.0',
+    install_node => '9.10.1',
   }
 
   file {"${docker_build_dir}/$pwa_user":
@@ -24,7 +24,7 @@ class pwa::build {
   vcsrepo { "${pwa_build_dir}":
       ensure   => latest,
       user     => $pwa_user,
-      revision => 'master',
+      revision => 'pwa-ui',
       provider => git,
       source   => 'https://github.com/alpheios-project/pwa-prototype.git',
       notify   => Exec['build-pwa-source'],
