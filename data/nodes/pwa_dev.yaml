@@ -1,6 +1,6 @@
 ---
   classes:
-    - role::pwa-dev
+    - role::pwa_dev
   users:
     'icinga':
       comment: 'Icinga user'
