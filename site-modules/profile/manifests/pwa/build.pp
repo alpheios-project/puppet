@@ -1,4 +1,6 @@
 class profile::pwa::build {
   include profile::docker::builder
-  include pwa::build
+  class {'pwa::build': 
+    branch => 'pwa-ui',
+  }
 }
