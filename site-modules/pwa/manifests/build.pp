@@ -37,8 +37,8 @@ class pwa::build ($mode = 'pwa', $branch = 'master') {
   }
 
   file { "${pwa_build_dir}/docker-nginx-config/conf.d/default.conf":
-    content => epp('modules/pwa/default.conf.epp',{
-      $server_name => "${mode}.alpheios.net",
+    content => epp('pwa/default.conf.epp',{
+      server_name => $mode,
     }),
     owner  => $pwa_user,
   }
@@ -65,7 +65,7 @@ class pwa::build ($mode = 'pwa', $branch = 'master') {
   }
 
   exec { 'remove-pwa-image':
-      command     => "docker rmi -f pwa",
+      command     => "docker rmi -f ${mode}",
       path        => ['/bin', '/usr/bin'],
       refreshonly => true,
       timeout     => 0,
