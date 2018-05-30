@@ -1,19 +1,20 @@
 # Run the  Server container
-class pwa::server {
+class pwa::server($mode = 'pwa') {
 
   $docker_run_dir = lookup('docker_run_dir', String)
   $docker_build_dir = lookup('docker_build_dir', String)
-  $pwa_run_dir = "${docker_run_dir}/pwa"
+  $pwa_run_dir = $dev ? "${docker_run_dir}/pwa-dev" : "${docker_run_dir}/pwa"
   $pwa_user = 'balmas'
-  $pwa_build_dir = "${docker_build_dir}/$pwa_user/pwa"
+  $pwa_build_dir = $dev ? "${docker_build_dir}/$pwa_user/pwa-dev" : "${docker_build_dir}/$pwa_user/pwa" 
+  $pwa_image = $dev ? "pwa-dev" : "pwa"
 
   file { $pwa_run_dir:
     ensure => directory,
   }
 
-  docker::run { 'pwa':
+  docker::run { $pwa_image:
     ensure  => present,
-    image   => "pwa:latest",
+    image   => "${pwa_image}:latest",
     ports   => [
       "80:80",
       "443:443",

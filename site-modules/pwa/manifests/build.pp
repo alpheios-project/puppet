@@ -1,8 +1,9 @@
 # Build the Docker image
-class pwa::build {
+class pwa::build ($mode = 'pwa', $branch = 'master') {
   $docker_build_dir = lookup('docker_build_dir', String)
   $pwa_user = 'balmas'
-  $pwa_build_dir = "${docker_build_dir}/${pwa_user}/pwa"
+  $pwa_build_dir = "${docker_build_dir}/${pwa_user}/${mode}"
+  $server_name = "${mode}.alpheios.net" 
 
   class { 'nvm':
     user         => $pwa_user,
@@ -24,7 +25,7 @@ class pwa::build {
   vcsrepo { "${pwa_build_dir}":
       ensure   => latest,
       user     => $pwa_user,
-      revision => 'pwa-ui',
+      revision => $branch,
       provider => git,
       source   => 'https://github.com/alpheios-project/pwa-prototype.git',
       notify   => Exec['build-pwa-source'],
@@ -36,7 +37,9 @@ class pwa::build {
   }
 
   file { "${pwa_build_dir}/docker-nginx-config/conf.d/default.conf":
-    source => 'puppet:///modules/pwa/default.conf',
+    content => epp('modules/pwa/default.conf.epp',{
+      $server_name => "${mode}.alpheios.net",
+    }),
     owner  => $pwa_user,
   }
 
@@ -66,13 +69,13 @@ class pwa::build {
       path        => ['/bin', '/usr/bin'],
       refreshonly => true,
       timeout     => 0,
-      notify      => Docker::Image['pwa'],
+      notify      => Docker::Image[$mode],
   }
 
-  docker::image { 'pwa':
+  docker::image { $mode:
     ensure      => present,
     docker_file => "${pwa_build_dir}/docker-image/Dockerfile",
-    notify      => Docker::Run['pwa'],
+    notify      => Docker::Run[$mode],
     force       => true,
   }
 }
