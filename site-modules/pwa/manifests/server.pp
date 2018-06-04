@@ -11,7 +11,7 @@ class pwa::server($mode = 'pwa') {
     ensure => directory,
   }
 
-  docker::run { $mode:
+  docker::run { "${mode}":
     ensure  => present,
     image   => "${mode}:latest",
     ports   => [

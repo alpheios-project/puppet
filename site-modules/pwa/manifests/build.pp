@@ -4,6 +4,11 @@ class pwa::build ($mode = 'pwa', $branch = 'master') {
   $pwa_user = 'balmas'
   $pwa_build_dir = "${docker_build_dir}/${pwa_user}/${mode}"
   $server_name = "${mode}.alpheios.net" 
+  if ($mode == 'pwa') {
+    $target = 'build-node-prod'
+  } else {
+    $target = 'build-node-dev'
+  }
 
   class { 'nvm':
     user         => $pwa_user,
@@ -18,7 +23,9 @@ class pwa::build ($mode = 'pwa', $branch = 'master') {
 
 
   file { '/usr/local/bin/build-pwa':
-    source   => 'puppet:///modules/pwa/build-pwa.sh',
+    content => epp('pwa/build-pwa.sh.epp',{
+      target => $target,
+    }),
     mode => '0775',
   } 
 
