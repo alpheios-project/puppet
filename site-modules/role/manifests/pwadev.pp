@@ -5,7 +5,7 @@ class role::pwadev {
   include profile::docker::runner
   class { 'pwa::build': 
     mode   => 'pwa-dev',
-    branch => 'issues474641',
+    branch => 'master',
   }
   class { 'pwa::server':
     mode   => 'pwa-dev',
