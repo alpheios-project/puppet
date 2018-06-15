@@ -67,7 +67,6 @@ class pwa::build ($mode = 'pwa', $branch = 'master') {
     user        => $pwa_user,
     environment => ["HOME=/home/${pwa_user}", "NVM_DIR=/home/${pwa_user}/.nvm"],
     command     => '/usr/local/bin/build-pwa',
-    notify      => Exec['remove-pwa-image'],
     require     => Class['nvm'],
   }
 
