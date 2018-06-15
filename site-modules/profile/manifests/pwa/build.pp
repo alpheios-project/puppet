@@ -1,6 +1,6 @@
 class profile::pwa::build {
   include profile::docker::builder
   class {'pwa::build': 
-    branch => 'master',
+    branch => 'v0.50',
   }
 }
