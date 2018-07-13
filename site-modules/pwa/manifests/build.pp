@@ -5,14 +5,14 @@ class pwa::build ($mode = 'pwa', $branch = 'master') {
   $pwa_build_dir = "${docker_build_dir}/${pwa_user}/${mode}"
   $server_name = "${mode}.alpheios.net" 
   if ($mode == 'pwa') {
-    $target = 'build-node-prod'
+    $target = 'build-prod'
   } else {
-    $target = 'build-node-dev'
+    $target = 'build-dev'
   }
 
   class { 'nvm':
     user         => $pwa_user,
-    install_node => '9.10.1',
+    install_node => '10.5.0',
   }
 
   file {"${docker_build_dir}/$pwa_user":

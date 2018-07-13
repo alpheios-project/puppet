@@ -1,7 +1,9 @@
 <%- | String $target | -%>
 #!/bin/bash
 source ~/.nvm/nvm.sh
-nvm use 9.10.1
+nvm use 10.5.0
+rm -fr node_modules
+rm package-lock.json
 npm install     
 npm run <%= $target %>
 
