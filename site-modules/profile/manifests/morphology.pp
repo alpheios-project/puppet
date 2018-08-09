@@ -56,6 +56,13 @@ class profile::morphology {
     notify  => Python::Virtualenv[$app_root],
   }
 
+  vcsrepo { '/usr/local/lexical-tests':
+    ensure   => latest,
+    revision => 'alllangs',
+    provider => git,
+    source   => "https://github.com/alpheios-project/lexical-tests",
+  }
+
   python::virtualenv { $app_root:
     ensure       => present,
     version      => '3',
@@ -103,6 +110,11 @@ class profile::morphology {
       {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
       {'rewrite_rule' => [ '/legacy/aramorph2 http://localhost:5000/analysis/word?lang=ara&engine=amleg [P,L,QSA]']},
     ],
+    aliases   => [
+      { alias => '/lexical-tests',
+        path  => '/usr/local/lexical-tests',
+      }
+    ],
     headers    => $headers,
   }
 
@@ -117,6 +129,11 @@ class profile::morphology {
       {'rewrite_rule' => [ '/legacy/aramorph2 http://localhost:5000/analysis/word?lang=ara&engine=amleg [P,L,QSA]']},
     ],
     headers    => $headers,
+    aliases   => [
+      { alias => '/lexical-tests',
+        path  => '/usr/local/lexica-tests',
+      }
+    ],
     ssl        => true,
     ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
     ssl_key    => '/etc/ssl/private/Alpheios.key',
