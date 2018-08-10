@@ -67,7 +67,7 @@ class profile::ats {
 
   $headers = [
       "set Access-Control-Allow-Origin '*'",
-      "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'"
+      "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'",
   ]
 
   apache::vhost { 'ats':
@@ -79,15 +79,16 @@ class profile::ats {
   }
 
   apache::vhost { 'ats-ssl':
-    servername => 'ats.alpheios.net',
-    port       => '443',
-    docroot    => '/var/www/vhost',
-    proxy_pass => [ $proxy_pass ],
-    headers    => $headers,
-    ssl        => true,
-    ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
-    ssl_key    => '/etc/ssl/private/Alpheios.key',
-    ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
+    servername      => 'ats.alpheios.net',
+    port            => '443',
+    docroot         => '/var/www/vhost',
+    proxy_pass      => [ $proxy_pass ],
+    headers         => $headers,
+    request_headers => [ "set X-Forwarded-Proto 'https'", ],
+    ssl             => true,
+    ssl_cert        => '/etc/ssl/certs/STAR_alpheios.net.crt',
+    ssl_key         => '/etc/ssl/private/Alpheios.key',
+    ssl_chain       => '/etc/ssl/certs/ca-bundle-client.crt',
   }
 
   firewall { '100 ATS Service Access':
