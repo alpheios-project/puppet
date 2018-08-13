@@ -58,7 +58,7 @@ class profile::morphology {
 
   vcsrepo { '/usr/local/lexical-tests':
     ensure   => latest,
-    revision => 'alllangs',
+    revision => 'master',
     provider => git,
     source   => "https://github.com/alpheios-project/lexical-tests",
   }
