@@ -1,6 +1,11 @@
 # Webserver setup for Capitains
 class capitains::apache {
 
+  $proxy_pass_dts = {
+    'path'    => '/api/dts/',
+    'url' => 'http://dts.alpheios.net/dts/',
+  }
+
   $proxy_pass = {
     'path'    => '/',
     'url' => 'http://localhost:5000/',
@@ -15,7 +20,7 @@ class capitains::apache {
     servername  => hiera('capitains::domain'),
     port        => '80',
     docroot     => $capitains::www_root,
-    proxy_pass  => [$proxy_pass],
+    proxy_pass  => [$proxy_pass_dts, $proxy_pass],
     headers     => $headers,
   }
 
