@@ -13,9 +13,9 @@ class capitains($www_root,
 
   vcsrepo { $app_root:
      ensure   => latest,
-     revision => 'master',
+     revision => 'dts-draft-1',
      provider => git,
-     source   => "https://github.com/alpheios-project/alpheios_nemo_ui",
+     source   => "https://github.com/Capitains/Nautilus",
      notify   => Python::Virtualenv[$app_root],
   }
 

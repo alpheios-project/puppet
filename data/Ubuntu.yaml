@@ -10,6 +10,8 @@ capitains::deps:
     - 'zlib1g'
     - 'zlib1g-dev'
     - 'linux-headers-generic'
+    - 'libdb5.3'
+    - 'libdb-dev'
     - 'libxml2'
     - 'libxml2-dev'
     - 'libxslt1.1'

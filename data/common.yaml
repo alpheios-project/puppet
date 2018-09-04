@@ -18,7 +18,7 @@
   icinga::key_contact: 'emergency'
   pnp4nagios_url_base: 'http://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/'
   pnp4nagios_version: '0.6.25'
-  capitains::domain: 'texts.alpheios.net'
+  capitains::domain: 'dts.alpheios.net'
   capitains::www_root: '/tmp/capitains'
   capitains::data_root: '/mnt/data'
   capitains::app_root: '/usr/local/capitains'

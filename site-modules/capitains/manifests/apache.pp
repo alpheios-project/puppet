@@ -11,7 +11,7 @@ class capitains::apache {
    "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'"
   ]
 
-  apache::vhost { 'texts':
+  apache::vhost { 'dts':
     servername  => hiera('capitains::domain'),
     port        => '80',
     docroot     => $capitains::www_root,
