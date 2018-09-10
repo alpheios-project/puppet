@@ -52,6 +52,7 @@ resolver.parse()
 
 app = Flask("Nautilus")
 nautilus = FlaskNautilus(
+    prefix="/api",
     app=app,
     resolver=resolver
 )
