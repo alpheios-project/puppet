@@ -3,12 +3,12 @@ class capitains::apache {
 
   $proxy_pass_dts_base = {
     'path'    => '/api/dts',
-    'url' => 'http://dts.alpheios.net/dts',
+    'url' => 'http://dts.alpheios.net/api/dts',
   }
 
   $proxy_pass_dts = {
     'path'    => '/api/dts/',
-    'url' => 'http://dts.alpheios.net/dts/',
+    'url' => 'http://dts.alpheios.net/api/dts/',
   }
 
   $proxy_pass = {
