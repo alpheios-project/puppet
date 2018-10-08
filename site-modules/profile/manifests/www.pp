@@ -19,7 +19,7 @@ class profile::www {
 
    vcsrepo { '/var/www/enhanced-texts-v1':
      ensure   => latest,
-     revision => 'v15',
+     revision => 'v2.0.3.0',
      provider => git,
      source   => 'https://github.com/alpheios-project/enhanced-texts-v1.git'
    }
