@@ -58,4 +58,10 @@ class profile::exist::server {
 
   }
 
+  firewall { '100 Web Service Access':
+    proto  => 'tcp',
+    dport  => ['80','443'],
+    action => 'accept',
+  }
+
 }
