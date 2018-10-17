@@ -19,7 +19,7 @@ class profile::www {
 
    vcsrepo { '/var/www/enhanced-texts-v1':
      ensure   => latest,
-     revision => 'v2.0.3.0',
+     revision => 'v2.0.3.1',
      provider => git,
      source   => 'https://github.com/alpheios-project/enhanced-texts-v1.git'
    }
@@ -100,4 +100,10 @@ class profile::www {
      ssl_key    => '/etc/ssl/private/Alpheios.key',
      ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
    }
+
+  firewall { '100 Web Service Access':
+    proto  => 'tcp',
+    dport  => ['80','443'],
+    action => 'accept',
+  }
 }
