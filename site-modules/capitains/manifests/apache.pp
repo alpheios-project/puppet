@@ -25,7 +25,7 @@ class capitains::apache {
     servername  => hiera('capitains::domain'),
     port        => '80',
     docroot     => $capitains::www_root,
-    proxy_pass  => [$proxy_pass_dts_base, $proxy_pass_dts, $proxy_pass],
+    proxy_pass  => [$proxy_pass],
     headers     => $headers,
   }
 
