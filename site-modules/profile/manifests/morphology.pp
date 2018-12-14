@@ -74,14 +74,17 @@ class profile::morphology {
   }
 
   python::gunicorn { 'morphology-vhost':
-    ensure     => present,
-    virtualenv => "${app_root}/venv",
-    dir        => $app_root,
-    timeout    => 120,
-    bind       => 'localhost:5000',
-    appmodule  => 'app:app',
-    owner      => 'www-data',
-    group      => 'www-data',
+    ensure            => present,
+    virtualenv        => "${app_root}/venv",
+    dir               => $app_root,
+    timeout           => 120,
+    bind              => 'localhost:5000',
+    workers           => 5,
+    access_log_format => '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s',
+    accesslog         => '/var/log/gunicorn/access.log',
+    appmodule         => 'app:app',
+    owner             => 'www-data',
+    group             => 'www-data',
   }
 
   exec { 'restart-morph-gunicorn':
