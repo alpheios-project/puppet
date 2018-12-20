@@ -85,12 +85,17 @@ class profile::morphology {
     dir               => $app_root,
     timeout           => 120,
     bind              => 'localhost:5000',
-    workers           => 5,
+    workers           => 3,
     access_log_format => '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s',
     accesslog         => '/var/log/gunicorn/access.log',
     appmodule         => 'app:app',
     owner             => 'www-data',
     group             => 'www-data',
+    args              => [
+     '--worker-class=gevent',
+     '--worker-connections=50'
+    ] 
+
   }
 
   exec { 'restart-morph-gunicorn':
