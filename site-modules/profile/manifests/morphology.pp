@@ -74,7 +74,13 @@ class profile::morphology {
   }
 
   python::gunicorn { 'morphology-vhost':
-    ensure            => present,
+    ensure      => present,
+    osenv       => {
+      'LANG'    => 'en_US.utf8',
+      'LANG'    => 'en_US.UTF-8',
+      'LC_LANG' => 'en_US.UTF-8',
+      'LC_ALL'  => 'en_US.UTF-8',
+    },
     virtualenv        => "${app_root}/venv",
     dir               => $app_root,
     timeout           => 120,
