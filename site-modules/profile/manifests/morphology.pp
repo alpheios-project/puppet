@@ -160,4 +160,11 @@ class profile::morphology {
     action => 'accept',
   }
 
+  cron { 'run-cloudwatch':
+    ensure  => present,
+    command => '/etc/puppetlabs/code/environments/production/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --disk-space-util --disk-path=/ --from-cron',
+    minute  => '5'
+  }
+
+
 }
