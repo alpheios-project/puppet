@@ -85,7 +85,7 @@ class profile::morphology {
     dir               => $app_root,
     timeout           => 120,
     bind              => 'localhost:5000',
-    workers           => 3,
+    workers           => 5,
     access_log_format => '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s',
     accesslog         => '/var/log/gunicorn/access.log',
     appmodule         => 'app:app',
@@ -163,7 +163,7 @@ class profile::morphology {
   cron { 'run-cloudwatch':
     ensure  => present,
     command => '/etc/puppetlabs/code/environments/production/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --mem-used --mem-avail --disk-space-util --disk-path=/ --from-cron',
-    minute  => '5'
+    minute  => '*/5',
   }
 
 
