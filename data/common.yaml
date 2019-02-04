@@ -35,3 +35,7 @@
       cibase: 'alpheios-project/cts-texts-latinLit'
     - name: 'cts-texts-arabicLit'
       cibase: 'alpheios-project/cts-texts-arabicLit'
+    - name: 'perseus-latinLit'
+      cibase: 'PerseusDL/canonical-latinLit'
+    - name: 'perseus-greekLit'
+      cibase: 'PerseusDL/canonical-greekLit'

@@ -55,6 +55,7 @@ def dispatchGreekLit(collection, path=None, **kwargs):
 resolver = NautilusCTSResolver(
     [os.path.join(d,o) for o in os.listdir(d) if os.path.isdir(os.path.join(d,o))],
     dispatcher=dispatcher,
+    filter = lambda t: t.__subtype__ == 'edition',
     cache=nautilus_cache
 )
 

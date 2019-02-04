@@ -13,7 +13,7 @@ class capitains($www_root,
 
   vcsrepo { $app_root:
      ensure   => latest,
-     revision => 'v2.0',
+     revision => 'v2.0-tei-test',
      provider => git,
      source   => "https://github.com/alpheios-project/alpheios_nemo_ui",
      notify   => Python::Virtualenv[$app_root],
