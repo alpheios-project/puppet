@@ -15,6 +15,8 @@ from flask_nemo import Nemo
 from flask_nemo.chunker import level_grouper
 from capitains_nautilus.flask_ext import FlaskNautilus
 from alpheios_nemo_ui import AlpheiosNemoUI, scheme_grouper
+from alpheios_nemo_ui.plugins.alpheios_breadcrumb import AlpheiosBreadcrumb
+
 
 d = "<%= @data_root %>"
 #
@@ -125,7 +127,7 @@ nemo = Nemo(
     chunker={
         "default": scheme_grouper
     },
-    plugins=[AlpheiosNemoUI("UA-8210342-2")],
+    plugins=[AlpheiosNemoUI("UA-8210342-2"),AlpheiosBreadcrumb()],
 
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")
