@@ -32,7 +32,14 @@ class capitains($www_root,
   }
 
   file { "${app_root}/app.py":
-    content => template('capitains/app.py.erb'),
+    content           => epp('capitains/app.py.epp',{
+      'data_root'     => $data_root,
+      'redis_host'    => $redis_host,
+      'client_id'     => lookup('auth0_clientid',String),
+      'client_secret' => lookup('auth0_clientsecret',String),
+      'secret_key'    => lookup('flask_sessionsecret',String),
+      'domain'        =>  lookup('capitains::domain', String),
+    }),
     notify  => Python::Virtualenv[$capitains::app_root],
   }
 
@@ -48,6 +55,15 @@ class capitains($www_root,
 
   file { "${app_root}/requirements.txt":
     content => template('capitains/requirements.txt.erb'),
+    require    => Vcsrepo[$app_root],
+    notify => Python::Virtualenv[$app_root],
+  }
+
+  file { "${app_root}/alpheios_nemo_ui/data/assets/js/env.js":
+    content        => epp('capitains/env.js.epp', {
+      'domain'         =>  lookup('capitains::domain', String),
+      'wordlist_url' =>  lookup('apis::wordlist_url', String)
+    }),
     require    => Vcsrepo[$app_root],
     notify => Python::Virtualenv[$app_root],
   }

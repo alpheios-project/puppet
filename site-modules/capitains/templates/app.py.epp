@@ -1,5 +1,13 @@
-# -*- coding: utf-8 -*-
+<%- | 
+  String[1] $data_root,
+  String[1] $redis_host,
+  String[1] $secret_key,
+  String[1] $client_id,
+  String[1] $client_secret,
+  String[1] $domain,
+| -%>
 
+# -*- coding: utf-8 -*-
 import os
 from flask import Flask, request
 from werkzeug.contrib.cache import RedisCache, FileSystemCache
@@ -16,22 +24,23 @@ from flask_nemo.chunker import level_grouper
 from capitains_nautilus.flask_ext import FlaskNautilus
 from alpheios_nemo_ui import AlpheiosNemoUI, scheme_grouper
 from alpheios_nemo_ui.plugins.alpheios_breadcrumb import AlpheiosBreadcrumb
+from authlib.flask.client import OAuth
 
 
-d = "<%= @data_root %>"
+d = "<%= $data_root %>"
 #
 tic = TextInventoryCollection()
 latin = PrototypeTextInventory("urn:perseus:latinLit", parent=tic)
 latin.set_label("Classical Latin", "eng")
-latin.set_label("Latin Classique", "fre")
+#latin.set_label("Latin Classique", "fre")
 ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
 ara.set_label("Classical Arabic", "eng")
-ara.set_label("Arabe Classique", "fre")
+#ara.set_label("Arabe Classique", "fre")
 gc = PrototypeTextInventory("urn:perseus:greekLit", parent=tic)
 gc.set_label("Ancient Greek", "eng")
-gc.set_label("Grec Ancien", "fre")
+#gc.set_label("Grec Ancien", "fre")
 
-http_cache = Cache(config={'CACHE_TYPE': "redis", "CACHE_REDIS_HOST": "<%= scope.lookupvar('capitains::redis_host') %>", "CACHE_DEFAULT_TIMEOUT": 0})
+http_cache = Cache(config={'CACHE_TYPE': "redis", "CACHE_REDIS_HOST": "<%= $redis_host %>", "CACHE_DEFAULT_TIMEOUT": 0})
 nautilus_cache = FileSystemCache("/tmp/ctscache", threshold=10000, default_timeout=28800)
 dispatcher = CollectionDispatcher(tic)
 
@@ -109,6 +118,27 @@ resolver = NautilusCTSResolver(
 )
 
 app = Flask("Nautilus")
+app.secret_key = '<%= $secret_key %>'
+client_id = '<%= $client_id %>'
+client_secret = '<%= $client_secret %>'
+oauth = OAuth(app)
+
+auth0 = oauth.register(
+    'auth0',
+    client_id=client_id,
+    client_secret=client_secret,
+    api_base_url='https://alpheios.auth0.com',
+    access_token_url='https://alpheios.auth0.com/oauth/token',
+    authorize_url='https://alpheios.auth0.com/authorize',
+    client_kwargs={
+        'audience': 'alpheios.net:apis',
+        'scope': 'openid profile',
+    },
+)
+
+
+
+
 nautilus = FlaskNautilus(
     app=app,
     prefix="/api",
@@ -127,7 +157,7 @@ nemo = Nemo(
     chunker={
         "default": scheme_grouper
     },
-    plugins=[AlpheiosNemoUI("UA-8210342-2"),AlpheiosBreadcrumb()],
+    plugins=[AlpheiosNemoUI("UA-8210342-2",auth0,'http://<%= $domain %>'),AlpheiosBreadcrumb()],
 
     transform={
         "default": resource_filename("alpheios_nemo_ui","data/assets/static/xslt/alpheios-enhanced.xsl")

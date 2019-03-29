@@ -18,6 +18,7 @@
   icinga::key_contact: 'emergency'
   pnp4nagios_url_base: 'http://downloads.sourceforge.net/project/pnp4nagios/PNP-0.6/'
   pnp4nagios_version: '0.6.25'
+  apis::wordlist_url: 'https://w2tfh159s2.execute-api.us-east-2.amazonaws.com/prod/words'
   capitains::domain: 'texts-test.alpheios.net'
   capitains::www_root: '/tmp/capitains'
   capitains::data_root: '/mnt/data'
@@ -26,6 +27,7 @@
   capitains::redis_host: 'localhost'
   capitains::workdir: '/usr/local/capitains_work'
   capitains::ci_url: 'https://api.github.com/repos'
+  capitains::logout_url: 'https://alpheios.net/pages/logout'
   capitains::repo_base_url: 'https://github.com/'
   capitains::repos_update_flags: ''
   capitains::repos: 
@@ -36,6 +38,6 @@
     - name: 'cts-texts-arabicLit'
       cibase: 'alpheios-project/cts-texts-arabicLit'
     - name: 'perseus-latinLit'
-      cibase: 'PerseusDL/canonical-latinLit'
+      cibase: 'alpheios-project/canonical-latinLit'
     - name: 'perseus-greekLit'
       cibase: 'PerseusDL/canonical-greekLit'
