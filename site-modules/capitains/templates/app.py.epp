@@ -33,8 +33,8 @@ tic = TextInventoryCollection()
 latin = PrototypeTextInventory("urn:perseus:latinLit", parent=tic)
 latin.set_label("Classical Latin", "eng")
 #latin.set_label("Latin Classique", "fre")
-ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
-ara.set_label("Classical Arabic", "eng")
+#ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
+#ara.set_label("Classical Arabic", "eng")
 #ara.set_label("Arabe Classique", "fre")
 gc = PrototypeTextInventory("urn:perseus:greekLit", parent=tic)
 gc.set_label("Ancient Greek", "eng")
@@ -52,11 +52,11 @@ def dispatchLatinLit(collection, path=None, **kwargs):
         return True
     return False
 
-@dispatcher.inventory("urn:alpheios:arabicLit")
-def dispatchGreekLit(collection, path=None, **kwargs):
-    if collection.id.startswith("urn:cts:arabicLit:"):
-        return True
-    return False
+#@dispatcher.inventory("urn:alpheios:arabicLit")
+#def dispatchGreekLit(collection, path=None, **kwargs):
+#    if collection.id.startswith("urn:cts:arabicLit:"):
+#        return True
+#    return False
 
 @dispatcher.inventory("urn:perseus:greekLit")
 def dispatchGreekLit(collection, path=None, **kwargs):
@@ -65,7 +65,8 @@ def dispatchGreekLit(collection, path=None, **kwargs):
     return False
 
 
-unfiltered_collections = [ 'arabicLit' ]
+#unfiltered_collections = [ 'arabicLit' ]
+unfiltered_collections = [ ]
 
 allowed_textgroups = [
     'phi0893', # Horace
