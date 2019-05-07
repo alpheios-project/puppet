@@ -72,11 +72,11 @@ allowed_textgroups = [
     'phi0893', # Horace
     'phi0474', # Cicero
     'tlg0011', # Sophocles
+    'phi0448', # Caesar
 ]
 
 allowed_works = [
     'urn:cts:latinLit:phi0690.phi003', # vergil aen id
-    'urn:cts:latinLit:phi0448.phi001', # caesar gallic war
     'urn:cts:latinLit:phi0472.phi001', # catullus carmina
     'urn:cts:latinLit:phi0620.phi001', # propertius elegies
     'urn:cts:greekLit:tlg0020.tlg001', # hesiod theogeny
@@ -85,10 +85,14 @@ allowed_works = [
     'urn:cts:greekLit:tlg0032.tlg007', # xenophon cyropaedia
     'urn:cts:greekLit:tlg0032.tlg001', # xenophon hellenica
     'urn:cts:greekLit:tlg0032.tlg002', # xenophon memorabilia
+    'urn:cts:greekLit:tlg0059.tlg002', # plato apology
+    'urn:cts:greekLit:tlg0059.tlg001', # plato euthyphro
+    'urn:cts:greekLit:tlg0059.tlg011', # plato symposium
+    'urn:cts:greekLit:tlg0540.tlg002', # lysius funeral oration
+    'urn:cts:greekLit:tlg0561.tlg001', # longus daphnis and chloe
 ]
 
 allowed_editions = [
-    'urn:cts:latinLit:phi0959.phi006.alpheios-text-lat1',
     'urn:cts:greekLit:tlg0085.tlg003.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0085.tlg004.alpheios-text-grc1',
     'urn:cts:greekLit:tlg0085.tlg007.alpheios-text-grc1',
