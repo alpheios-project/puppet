@@ -44,9 +44,31 @@ class capitains::apache {
     ],
   }
 
+  apache::vhost { 'ssl-texts':
+    servername => hiera('capitains::domain'),
+    port          => '443',
+    docroot    => $capitains::www_root,
+    proxy_pass => [$proxy_pass_not, $proxy_pass_dts_base, $proxy_pass_dts, $proxy_pass],
+    headers    => $headers,
+    aliases    => [
+      {
+        alias    => '/assets/nemo.secondary/static',
+        path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/images",
+      },
+      {
+        alias    => '/assets/nemo.secondary',
+        path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets",
+      },
+    ],
+    ssl        => true,
+    ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
+    ssl_key    => '/etc/ssl/private/Alpheios.key',
+    ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
+  }
+
   firewall { '100 Allow web traffic for Capitains':
     proto  => 'tcp',
-    dport  => '80',
+    dport  => ['80','443'],
     action => 'accept',
   }
 }
