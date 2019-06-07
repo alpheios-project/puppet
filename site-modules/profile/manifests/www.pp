@@ -5,7 +5,7 @@ class profile::www {
 
    vcsrepo { '/var/www/landing-page':
      ensure   => latest,
-     revision => 'master',
+     revision => 'v1.0',
      provider => git,
      source   => 'https://github.com/alpheios-project/landing-page.git'
    }
@@ -19,7 +19,7 @@ class profile::www {
 
    vcsrepo { '/var/www/enhanced-texts-v1':
      ensure   => latest,
-     revision => 'v2.1.0.1',
+     revision => 'v2.1.0.2',
      provider => git,
      source   => 'https://github.com/alpheios-project/enhanced-texts-v1.git'
    }
