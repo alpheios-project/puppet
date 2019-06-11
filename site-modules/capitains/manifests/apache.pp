@@ -32,7 +32,7 @@ class capitains::apache {
     port            => '80',
     docroot         => $capitains::www_root,
     redirect_status => 'permanent',
-    redirect_dest   => "https://${servername}"
+    redirect_dest   => "https://${servername}/"
   }
 
   apache::vhost { 'ssl-texts':
