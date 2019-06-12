@@ -17,8 +17,13 @@ class capitains::apache {
     'url' => 'http://localhost:5000/',
   }
 
-  $proxy_pass_not = {
+  $proxy_pass_not_assets = {
     'path' => '/assets',
+    'url'  => '!',
+  }
+
+  $proxy_pass_not_images = {
+    'path' => '/images',
     'url'  => '!',
   }
 
@@ -39,9 +44,13 @@ class capitains::apache {
     servername => $servername,
     port          => '443',
     docroot    => $capitains::www_root,
-    proxy_pass => [$proxy_pass_not, $proxy_pass_dts_base, $proxy_pass_dts, $proxy_pass],
+    proxy_pass => [$proxy_pass_not_assets, $proxy_pass_not_images, $proxy_pass_dts_base, $proxy_pass_dts, $proxy_pass],
     headers    => $headers,
     aliases    => [
+      {
+        alias    => '/images',
+        path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/images",
+      },
       {
         alias    => '/assets/nemo.secondary/static',
         path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/images",
@@ -51,10 +60,11 @@ class capitains::apache {
         path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets",
       },
     ],
-    ssl        => true,
-    ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
-    ssl_key    => '/etc/ssl/private/Alpheios.key',
-    ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
+    ssl             => true,
+    ssl_cert        => '/etc/ssl/certs/STAR_alpheios.net.crt',
+    ssl_key         => '/etc/ssl/private/Alpheios.key',
+    ssl_chain       => '/etc/ssl/certs/ca-bundle-client.crt',
+    custom_fragment => 'DeflateBufferSize 16192', # needed to avoid transfer-encoding chunked for alpheios-embedded.js
   }
 
   firewall { '100 Allow web traffic for Capitains':
