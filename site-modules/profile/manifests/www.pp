@@ -22,7 +22,7 @@ class profile::www {
 
    vcsrepo { '/var/www/landing-page':
      ensure   => latest,
-     revision => 'v1.0',
+     revision => 'master',
      provider => git,
      source   => 'git@github.com:alpheios-project/landing-page.git'
    }
