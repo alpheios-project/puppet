@@ -16,7 +16,7 @@ class capitains($www_root,
      nvm_dir      => '/opt/nvm',
      version      => 'v0.29.0',
      profile_path => '/etc/profile.d/nvm.sh',
-     install_node => '10.16.0',
+     install_node => '12.6.0',
   }
 
   vcsrepo { $app_root:

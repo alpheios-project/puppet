@@ -56,6 +56,18 @@ class capitains::apache {
         path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/images",
       },
       {
+        alias    => '/assets/nemo.secondary/js/alpheios-embedded.min.js',
+        path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/node_modules/alpheios-embedded/dist/alpheios-embedded.min.js",
+      },
+      {
+        alias    => '/assets/nemo.secondary/js/alpheios-components.min.js',
+        path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/node_modules/alpheios-components/dist/alpheios-components.min.js",
+      },
+      {
+        alias    => '/assets/nemo.secondary/css/style-components.min.css',
+        path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets/node_modules/alpheios-components/dist/style/style-components.min.css",
+      },
+      {
         alias    => '/assets/nemo.secondary',
         path     => "${capitains::app_root}/alpheios_nemo_ui/data/assets",
       },
