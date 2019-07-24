@@ -1,6 +1,9 @@
 # Install Python 3
 class profile::python3 {
-  include apache
+
+  class {'apache': 
+  }
+
   class { 'python':
     version    => 'python3.5',
     pip        => 'present',
@@ -14,4 +17,8 @@ class profile::python3 {
     mod_path     => 'mod_wsgi.so-3.5',
     package_name => hiera('python3_mod_wsgi'),
   }
+
+  class { 'apache::mod::http2':
+  }
+
 }

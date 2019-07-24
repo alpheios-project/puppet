@@ -41,11 +41,13 @@ class capitains::apache {
   }
 
   apache::vhost { 'ssl-texts':
-    servername => $servername,
-    port          => '443',
-    docroot    => $capitains::www_root,
-    proxy_pass => [$proxy_pass_not_assets, $proxy_pass_not_images, $proxy_pass_dts_base, $proxy_pass_dts, $proxy_pass],
-    headers    => $headers,
+    apache_version => '2.5',
+    servername     => $servername,
+    protocols      => ['h2', 'h2c', 'http/1.1'],
+    port           => '443',
+    docroot        => $capitains::www_root,
+    proxy_pass     => [$proxy_pass_not_assets, $proxy_pass_not_images, $proxy_pass_dts_base, $proxy_pass_dts, $proxy_pass],
+    headers        => $headers,
     aliases    => [
       {
         alias    => '/images',
