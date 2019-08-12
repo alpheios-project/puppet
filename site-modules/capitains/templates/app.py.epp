@@ -79,7 +79,6 @@ allowed_textgroups = [
 allowed_works = [
     'urn:cts:latinLit:phi0690.phi003', # vergil aen id
     'urn:cts:latinLit:phi0472.phi001', # catullus carmina
-    'urn:cts:latinLit:phi0620.phi001', # propertius elegies
     'urn:cts:latinLit:phi0959.phi001', # Ovid Amores
     'urn:cts:latinLit:phi0959.phi002', # Ovid Epistulae
     'urn:cts:latinLit:phi0959.phi003', # Ovid Medicamina faciei femineae
