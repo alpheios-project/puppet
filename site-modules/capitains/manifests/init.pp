@@ -11,6 +11,14 @@ class capitains($www_root,
   include capitains::apache
   include capitains::repos
 
+  class { 'nvm':
+     user => 'root',
+     nvm_dir      => '/opt/nvm',
+     version      => 'v0.29.0',
+     profile_path => '/etc/profile.d/nvm.sh',
+     install_node => '12.6.0',
+  }
+
   vcsrepo { $app_root:
      ensure   => latest,
      revision => 'master',
