@@ -70,7 +70,8 @@ class capitains($www_root,
   file { "${app_root}/alpheios_nemo_ui/data/assets/js/env.js":
     content        => epp('capitains/env.js.epp', {
       'domain'         =>  lookup('capitains::domain', String),
-      'wordlist_url' =>  lookup('apis::wordlist_url', String)
+      'wordlist_url' =>  lookup('apis::wordlist_url', String),
+      'settings_url' =>  lookup('apis::settings_url', String)
     }),
     require    => Vcsrepo[$app_root],
     notify => Python::Virtualenv[$app_root],
