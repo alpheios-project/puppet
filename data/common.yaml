@@ -20,7 +20,7 @@
   pnp4nagios_version: '0.6.25'
   apis::wordlist_url: 'https://userapis.alpheios.net/v1/words'
   apis::settings_url: 'https://settings.alpheios.net/v1/settings'
-  capitains::domain: 'texts-test.alpheios.net'
+  capitains::domain: 'texts-beta.alpheios.net'
   capitains::www_root: '/tmp/capitains'
   capitains::data_root: '/mnt/data'
   capitains::app_root: '/usr/local/capitains'
