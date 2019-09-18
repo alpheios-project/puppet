@@ -34,6 +34,7 @@ class capitains::apache {
 
   apache::vhost { 'texts':
     servername      => $servername,
+    serveraliases => [ 'texts-beta.alpheios.net'],
     port            => '80',
     docroot         => $capitains::www_root,
     redirect_status => 'permanent',
@@ -43,6 +44,7 @@ class capitains::apache {
   apache::vhost { 'ssl-texts':
     apache_version => '2.5',
     servername     => $servername,
+    serveraliases => [ 'texts-beta.alpheios.net'],
     protocols      => ['h2', 'h2c', 'http/1.1'],
     port           => '443',
     docroot        => $capitains::www_root,
