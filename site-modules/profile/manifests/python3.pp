@@ -1,9 +1,9 @@
 # Install Python 3
 class profile::python3 {
 
-  class {'apache': 
+  class {'apache':
+    log_formats => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
   }
-
   class { 'python':
     version    => 'python3.5',
     pip        => 'present',

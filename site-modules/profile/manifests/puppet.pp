@@ -10,6 +10,7 @@ class profile::puppet {
     command => '/usr/local/bin/run-puppet',
     minute  => absent,
     hour    => '2',
+    weekday => '0'
   }
 
   $scripts = [

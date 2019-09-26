@@ -93,6 +93,7 @@ class capitains($www_root,
     notify  => Exec['restart-gunicorn'],
     command => "${app_root}/install-dev.sh",
     require => Python::Virtualenv[$capitains::app_root],
+    refreshonly => true,
   }
 
   python::gunicorn { 'vhost':

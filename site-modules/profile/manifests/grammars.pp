@@ -52,4 +52,10 @@ class profile::grammars {
      ssl_key    => '/etc/ssl/private/Alpheios.key',
      ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
    }
+
+  firewall { '100 Allow ssl traffic for grammars':
+    proto  => 'tcp',
+    dport  => '443',
+    action => 'accept',
+  }
 }

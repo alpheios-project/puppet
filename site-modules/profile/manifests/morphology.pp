@@ -74,14 +74,28 @@ class profile::morphology {
   }
 
   python::gunicorn { 'morphology-vhost':
-    ensure     => present,
-    virtualenv => "${app_root}/venv",
-    dir        => $app_root,
-    timeout    => 120,
-    bind       => 'localhost:5000',
-    appmodule  => 'app:app',
-    owner      => 'www-data',
-    group      => 'www-data',
+    ensure      => present,
+    osenv       => {
+      'LANG'    => 'en_US.utf8',
+      'LANG'    => 'en_US.UTF-8',
+      'LC_LANG' => 'en_US.UTF-8',
+      'LC_ALL'  => 'en_US.UTF-8',
+    },
+    virtualenv        => "${app_root}/venv",
+    dir               => $app_root,
+    timeout           => 120,
+    bind              => 'localhost:5000',
+    workers           => 5,
+    access_log_format => '%(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s" %(D)s',
+    accesslog         => '/var/log/gunicorn/access.log',
+    appmodule         => 'app:app',
+    owner             => 'www-data',
+    group             => 'www-data',
+    args              => [
+     '--worker-class=gevent',
+     '--worker-connections=50'
+    ] 
+
   }
 
   exec { 'restart-morph-gunicorn':
@@ -145,5 +159,12 @@ class profile::morphology {
     dport  => ['80','443'],
     action => 'accept',
   }
+
+  cron { 'run-cloudwatch':
+    ensure  => present,
+    command => '/etc/puppetlabs/code/environments/production/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --mem-used --mem-avail --disk-space-util --disk-path=/ --from-cron',
+    minute  => '*/5',
+  }
+
 
 }

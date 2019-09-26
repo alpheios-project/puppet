@@ -12,7 +12,7 @@
   docker::manage_kernel: false
   docker_run_dir: '/docker/run'
   docker_build_dir: '/docker/build'
-  firewall_drop: false
+  firewall_drop: true
   icinga::version: '1.14.0'
   icinga::contact: 'sysadmin'
   icinga::key_contact: 'emergency'

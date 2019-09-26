@@ -12,7 +12,7 @@
     - 'balmas'
     - 'vagrant'
   site::ip_address: ''
-  site::admin_email: 'bridget.almas@alpheios.net'
-  slack_webhook_url: 'https://hooks.slack.com/services/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'
+  site::admin_email: ''
+  slack_webhook_url: ''
   monitor_ips:
     - 127.0.0.1
