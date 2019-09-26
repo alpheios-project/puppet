@@ -10,10 +10,10 @@ hostname ${HOSTNAME}
 echo ${HOSTNAME} >/etc/hostname
 source /etc/lsb-release
 apt-key adv --fetch-keys http://apt.puppetlabs.com/DEB-GPG-KEY-puppet
-wget http://apt.puppetlabs.com/puppetlabs-release-pc1-${DISTRIB_CODENAME}.deb
-dpkg -i puppetlabs-release-pc1-${DISTRIB_CODENAME}.deb
+wget http://apt.puppetlabs.com/puppetlabs-release-${DISTRIB_CODENAME}.deb
+dpkg -i puppetlabs-release-${DISTRIB_CODENAME}.deb
 apt-get update
-apt-get -y install git puppet-agent build-essential ruby-dev ruby
+apt-get -y install git puppet build-essential ruby-dev ruby
 /opt/puppetlabs/puppet/bin/gem install gpgme --no-rdoc --no-ri
 /opt/puppetlabs/puppet/bin/gem install hiera-eyaml-gpg --no-rdoc --no-ri
 cd /etc/puppetlabs/code/environments
