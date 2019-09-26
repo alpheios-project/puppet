@@ -1,5 +1,6 @@
 # Install Python 3
 class profile::python3 {
+
   class {'apache':
     log_formats => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
   }
@@ -16,4 +17,8 @@ class profile::python3 {
     mod_path     => 'mod_wsgi.so-3.5',
     package_name => hiera('python3_mod_wsgi'),
   }
+
+  class { 'apache::mod::http2':
+  }
+
 }

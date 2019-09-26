@@ -11,9 +11,17 @@ class capitains($www_root,
   include capitains::apache
   include capitains::repos
 
+  class { 'nvm':
+     user => 'root',
+     nvm_dir      => '/opt/nvm',
+     version      => 'v0.29.0',
+     profile_path => '/etc/profile.d/nvm.sh',
+     install_node => '12.6.0',
+  }
+
   vcsrepo { $app_root:
      ensure   => latest,
-     revision => 'v2.0',
+     revision => 'v3.0.0-rc2',
      provider => git,
      source   => "https://github.com/alpheios-project/alpheios_nemo_ui",
      notify   => Python::Virtualenv[$app_root],
@@ -32,7 +40,14 @@ class capitains($www_root,
   }
 
   file { "${app_root}/app.py":
-    content => template('capitains/app.py.erb'),
+    content           => epp('capitains/app.py.epp',{
+      'data_root'     => $data_root,
+      'redis_host'    => $redis_host,
+      'client_id'     => lookup('auth0_clientid',String),
+      'client_secret' => lookup('auth0_clientsecret',String),
+      'secret_key'    => lookup('flask_sessionsecret',String),
+      'domain'        =>  lookup('capitains::domain', String),
+    }),
     notify  => Python::Virtualenv[$capitains::app_root],
   }
 
@@ -48,6 +63,16 @@ class capitains($www_root,
 
   file { "${app_root}/requirements.txt":
     content => template('capitains/requirements.txt.erb'),
+    require    => Vcsrepo[$app_root],
+    notify => Python::Virtualenv[$app_root],
+  }
+
+  file { "${app_root}/alpheios_nemo_ui/data/assets/js/env.js":
+    content        => epp('capitains/env.js.epp', {
+      'domain'         =>  lookup('capitains::domain', String),
+      'wordlist_url' =>  lookup('apis::wordlist_url', String),
+      'settings_url' =>  lookup('apis::settings_url', String)
+    }),
     require    => Vcsrepo[$app_root],
     notify => Python::Virtualenv[$app_root],
   }
