@@ -4,7 +4,7 @@ class profile::morphology {
   include profile::morphology::morpheus
   include profile::morphology::wordsxml
   include profile::morphology::aramorph
-  include profile::python3
+  include profile::python3http1
   class { 'redis': 
     maxmemory        => '4gb',
     maxmemory_policy => 'allkeys-lru',

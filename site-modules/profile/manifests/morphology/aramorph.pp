@@ -3,7 +3,7 @@ class profile::morphology::aramorph {
   $docker_build_dir = lookup('docker_build_dir', String)
   $build_dir = "${docker_build_dir}/aramorph"
 
-  $password = lookup('bama2_repo_password', String)
+  $token = lookup('bama2_repo_token', String)
 
   vcsrepo { $build_dir:
     ensure   => latest,
@@ -15,7 +15,7 @@ class profile::morphology::aramorph {
   file { "${build_dir}/Dockerfile":
     content                 => epp('profile/morphology/aramorph/Dockerfile.epp', {
       'bama2_repo_user'     => 'balmas@gmail.com',
-      'bama2_repo_password' => $password,
+      'bama2_repo_token' => $token,
     }),
     require => Vcsrepo[$app_root],
   }
