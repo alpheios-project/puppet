@@ -1,6 +1,6 @@
 class profile::ats {
   include profile::ssl
-  include profile::python3
+  include profile::python3http1
 
   $app_root = '/usr/local/alpheios-translation-service'
   $repos = 'https://github.com/alpheios-project/alpheios-translation-service'
