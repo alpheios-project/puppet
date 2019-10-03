@@ -115,13 +115,14 @@ class profile::morphology {
   ]
 
   apache::vhost { 'morphology':
-    servername => 'morph.alpheios.net',
-    port       => '80',
-    docroot    => '/var/www/vhost',
-    proxy_pass => [ $proxy_pass ],
-    rewrites   => [ 
-      {'rewrite_rule' => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
-      {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
+    servername          => 'morph.alpheios.net',
+    port                => '80',
+    docroot             => '/var/www/vhost',
+    proxy_pass          => [ $proxy_pass ],
+    proxy_preserve_host => 'On',
+    rewrites            => [ 
+      {'rewrite_rule'   => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
+      {'rewrite_rule'   => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
       {'rewrite_rule' => [ '/legacy/aramorph2 http://localhost:5000/analysis/word?lang=ara&engine=amleg [P,L,QSA]']},
     ],
     aliases   => [
@@ -137,6 +138,7 @@ class profile::morphology {
     port       => '443',
     docroot    => '/var/www/vhost',
     proxy_pass => [ $proxy_pass ],
+    proxy_preserve_host => 'On',
     rewrites   => [ 
       {'rewrite_rule' => [ '/legacy/latin http://localhost:5000/analysis/word?lang=lat&engine=wleg [P,L,QSA]']},
       {'rewrite_rule' => [ '/legacy/greek http://localhost:5000/analysis/word?lang=grc&engine=mgrcleg [P,L,QSA]']},
