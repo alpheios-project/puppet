@@ -12,6 +12,17 @@ class profile::www {
      notify => Service["ssh"],
    }
 
+   file {"/var/www/safari":
+     ensure => directory,
+   }
+
+   file { "/var/www/safari/index.html":
+      ensure  => file,
+      content => epp('profile/www/index.html.epp', {
+      }),
+   }
+
+
   ssh_authorized_key { 'admin@alpheios.net':
     ensure => present,
     user   => 'root',
@@ -81,6 +92,9 @@ class profile::www {
        },
        { alias => '/demo-paideia',
          path  => '/var/www/demo-paideia',
+       },
+       { alias => "/${hiera('safari_page')}",
+         path  => '/var/www/safari',
        },
      ],
      allow_encoded_slashes => 'on',
