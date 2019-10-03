@@ -93,9 +93,6 @@ class profile::www {
        { alias => '/demo-paideia',
          path  => '/var/www/demo-paideia',
        },
-       { alias => "/${hiera('safari_page')}",
-         path  => '/var/www/safari',
-       },
      ],
      allow_encoded_slashes => 'on',
    }
@@ -123,7 +120,10 @@ class profile::www {
        },
        { alias => '/alpheios-treebanks',
          path  => '/var/www/Gardener/docs',
-       }
+       },
+       { alias => "/${hiera('safari_page')}",
+         path  => '/var/www/safari',
+       },
      ],
      allow_encoded_slashes => 'on',
      ssl        => true,
