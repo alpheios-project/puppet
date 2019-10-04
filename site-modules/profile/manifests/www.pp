@@ -132,6 +132,17 @@ class profile::www {
      ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
    }
 
+   apache::vhost { 'ssl-alpheios-sf':
+     port       => '443',
+     servername => "${hiera('safari_domain')}.alpheios.net",
+     docroot    => "/var/www/safari",
+     allow_encoded_slashes => 'on',
+     ssl        => true,
+     ssl_cert   => '/etc/ssl/certs/STAR_alpheios.net.crt',
+     ssl_key    => '/etc/ssl/private/Alpheios.key',
+     ssl_chain  => '/etc/ssl/certs/ca-bundle-client.crt',
+   }
+
   firewall { '100 Web Service Access':
     proto  => 'tcp',
     dport  => ['80','443'],
