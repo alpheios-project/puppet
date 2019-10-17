@@ -99,7 +99,7 @@ class profile::www {
 
    apache::vhost { 'ssl-alpheios':
      port               => '443',
-     serveraliases => [ 'alpheios.net'], 
+     serveraliases => [ 'www.alpheios.net','alpheios.net'], 
      docroot       => '/var/www/landing-page/build',
      proxy_pass    =>   [ 
        { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
