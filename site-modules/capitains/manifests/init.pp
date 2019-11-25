@@ -40,13 +40,15 @@ class capitains($www_root,
   }
 
   file { "${app_root}/app.py":
-    content           => epp('capitains/app.py.epp',{
-      'data_root'     => $data_root,
-      'redis_host'    => $redis_host,
-      'client_id'     => lookup('auth0_clientid',String),
-      'client_secret' => lookup('auth0_clientsecret',String),
-      'secret_key'    => lookup('flask_sessionsecret',String),
-      'domain'        =>  lookup('capitains::domain', String),
+    content                  => epp('capitains/app.py.epp',{
+      'data_root'            => $data_root,
+      'redis_host'           => $redis_host,
+      'client_id'            => lookup('auth0_clientid',String),
+      'client_secret'        => lookup('auth0_clientsecret',String),
+      'secret_key'           => lookup('flask_sessionsecret',String),
+      'audience'             => lookup('auth0_audience',String),
+      'domain'               =>  lookup('capitains::domain', String),
+      'auth_max_age_seconds' => lookup('auth0_max_age_seconds',String,undef,''),
     }),
     notify  => Python::Virtualenv[$capitains::app_root],
   }
