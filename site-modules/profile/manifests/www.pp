@@ -31,6 +31,13 @@ class profile::www {
     key    => lookup('github_public_key',String),
   }
 
+  sshkey { 'github.com':
+    ensure => present,
+    type   => 'ssh-rsa',
+    target => '/root/.ssh/known_hosts',
+    key    => lookup('github_host_key',String),
+  }
+
    vcsrepo { '/var/www/landing-page':
      ensure   => latest,
      revision => 'master',
