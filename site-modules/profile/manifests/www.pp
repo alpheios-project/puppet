@@ -68,7 +68,7 @@ class profile::www {
 
    apache::vhost { 'www.alpheios.net':
      port          => '80',
-     serveraliases => [ 'alpheios.net','www.melampus.org','melampus.org'],
+     serveraliases => [ 'alpheios.net','www.alpheios.org','alpheios.org'],
      docroot       => '/var/www/landing-page/build',
      proxy_pass    =>   [ 
        { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
@@ -99,7 +99,7 @@ class profile::www {
 
    apache::vhost { 'ssl-alpheios':
      port               => '443',
-     serveraliases => [ 'www.alpheios.net','alpheios.net'], 
+     serveraliases => [ 'www.alpheios.net','alpheios.net','alpheios.org','www.alpheios.org'], 
      docroot       => '/var/www/landing-page/build',
      proxy_pass    =>   [ 
        { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
