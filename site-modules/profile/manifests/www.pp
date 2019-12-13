@@ -78,14 +78,9 @@ class profile::www {
      serveraliases => [ 'alpheios.net','www.alpheios.org','alpheios.org'],
      docroot       => '/var/www/landing-page/build',
      proxy_pass    =>   [ 
-       { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
-       { 'path'    => '/sites', 'url' => 'http://archive.alpheios.net/sites'},
-       { 'path'    =>  '/poetry', 'url' => 'http://archive.alpheios.net/poetry'},
        { 'path'    =>  '/perl/latin', 'url' => 'http://morph.alpheios.net/legacy/latin' },
        { 'path'    =>  '/perl/greek', 'url' => 'http://morph.alpheios.net/legacy/greek' },
        { 'path'    =>  '/perl/aramorph2', 'url' => 'http://morph.alpheios.net/legacy/aramorph2' },
-       { 'path'    =>  '/xpi-install', 'url' => 'http://archive.alpheios.net/xpi-install' },
-       { 'path'    =>  '/xpi-updates', 'url' => 'http://archive.alpheios.net/xpi-updates' },
      ],
      aliases   => [
        { alias => '/alpheios-demos',
@@ -109,14 +104,9 @@ class profile::www {
      serveraliases => [ 'www.alpheios.net','alpheios.net','alpheios.org','www.alpheios.org'], 
      docroot       => '/var/www/landing-page/build',
      proxy_pass    =>   [ 
-       { 'path'    => '/content', 'url' => 'http://archive.alpheios.net/content'},
-       { 'path'    => '/sites', 'url' => 'http://archive.alpheios.net/sites'},
-       { 'path'    =>  '/poetry', 'url' => 'http://archive.alpheios.net/poetry'},
        { 'path'    =>  '/perl/latin', 'url' => 'http://morph.alpheios.net/legacy/latin' },
        { 'path'    =>  '/perl/greek', 'url' => 'http://morph.alpheios.net/legacy/greek' },
        { 'path'    =>  '/perl/aramorph2', 'url' => 'http://morph.alpheios.net/legacy/aramorph2' },
-       { 'path'    =>  '/xpi-install', 'url' => 'http://archive.alpheios.net/xpi-install' },
-       { 'path'    =>  '/xpi-updates', 'url' => 'http://archive.alpheios.net/xpi-updates' },
      ],
      aliases   => [
        { alias => '/alpheios-demos',
