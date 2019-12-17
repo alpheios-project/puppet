@@ -5,8 +5,12 @@ class profile::python3 {
   apt::ppa { 'ppa:ondrej/apache2': }
 
   class {'apache': 
-    require        => Apt::Ppa['ppa:ondrej/apache2'],
-    apache_version => "2.5"
+    require => Apt::Ppa['ppa:ondrej/apache2'],
+    notify  => Exec['upgrade-apache'],
+  }
+
+  exec { 'upgrade-apache':
+    command => "/usr/bin/apt-get install --only-upgrade apache2"
   }
 
   class { 'python':
