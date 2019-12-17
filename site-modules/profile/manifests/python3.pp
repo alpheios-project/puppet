@@ -1,7 +1,12 @@
 # Install Python 3
 class profile::python3 {
+  include apt
+
+  apt::ppa { 'ppa:ondrej/apache2': }
 
   class {'apache': 
+    require        => Apt::Ppa['ppa:ondrej/apache2'],
+    apache_version => "2.5"
   }
 
   class { 'python':
