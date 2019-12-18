@@ -32,7 +32,15 @@ class capitains::apache {
    "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'"
   ]
 
+  apt::ppa { 'ppa:ondrej/apache2': }
+
+  exec { 'upgrade-apache':
+    require => Apt::Ppa['ppa:ondrej/apache2'],
+    command => "/usr/bin/apt-get --yes --force-yes install --only-upgrade apache2"
+  }
+
   apache::vhost { 'texts':
+    require        => Exec['upgrade-apache'],
     servername      => $servername,
     port            => '80',
     docroot         => $capitains::www_root,
@@ -41,6 +49,7 @@ class capitains::apache {
   }
 
   apache::vhost { 'ssl-texts':
+    require        => Exec['upgrade-apache'],
     apache_version => '2.5',
     servername     => $servername,
     protocols      => ['h2', 'h2c', 'http/1.1'],

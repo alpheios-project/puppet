@@ -2,16 +2,8 @@
 class profile::python3 {
   include apt
 
-  apt::ppa { 'ppa:ondrej/apache2': }
+  class {'apache': }
 
-  class {'apache': 
-    require => Apt::Ppa['ppa:ondrej/apache2'],
-    notify  => Exec['upgrade-apache'],
-  }
-
-  exec { 'upgrade-apache':
-    command => "/usr/bin/apt-get install --only-upgrade apache2"
-  }
 
   class { 'python':
     version    => 'python3.5',
