@@ -1,7 +1,10 @@
 class profile::www {
   include profile::ssl
 
-  class { 'apache': }
+   class { 'apache': 
+     log_formats   => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
+     default_vhost => false,
+   }
 
    file { '/root/.ssh/id_rsa':
      ensure => present,
@@ -132,6 +135,7 @@ class profile::www {
    apache::vhost { 'ssl-alpheios-sf':
      port       => '443',
      servername => "${hiera('safari_domain')}.alpheios.net",
+     serveraliases => [ "${hiera('safari_domain')}.alpheios.org" ],
      docroot    => "/var/www/safari",
      allow_encoded_slashes => 'on',
      ssl        => true,
