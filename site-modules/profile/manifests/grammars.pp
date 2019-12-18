@@ -25,6 +25,7 @@ class profile::grammars {
      port          => '80',
      docroot       => '/var/www/html',
      headers    => $headers,
+     serveraliases => [ 'grammars.alpheios.org' ],
      aliases   => [
        { alias => '/bennett',
          path  => '/var/www/grammar-bennett',
@@ -39,6 +40,7 @@ class profile::grammars {
      port          => '443',
      docroot       => '/var/www/html',
      headers    => $headers,
+     serveraliases => [ 'grammars.alpheios.org' ],
      aliases   => [
        { alias => '/bennett',
          path  => '/var/www/grammar-bennett',
