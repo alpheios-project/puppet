@@ -1,6 +1,6 @@
 <%- | 
   String[1] $bama2_repo_user,
-  String[1] $bama2_repo_password,
+  String[1] $bama2_repo_token,
 | -%>
 #start with ubuntu
 FROM ubuntu:12.04
@@ -27,7 +27,7 @@ ADD src /var/www/perl
 
 WORKDIR /var/www/perl/Alpheios
 
-RUN curl -u <%= $bama2_repo_user %>:<%= $bama2_repo_password %> -o bama2.zip -L https://github.com/alpheios-project/bama2/archive/master.zip && unzip bama2.zip && mv bama2-master bama2
+RUN curl -u <%= $bama2_repo_user %>:<%= $bama2_repo_token %> -o bama2.zip -L https://api.github.com/repos/alpheios-project/bama2/zipball/v1.0 && unzip bama2.zip && mv alpheios-project-bama2-d587970add972d03385bbac3614b5d83791630c7 bama2
 
 # Default command       
 CMD ["apachectl", "-D", "FOREGROUND"]

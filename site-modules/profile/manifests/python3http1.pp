@@ -1,9 +1,9 @@
 # Install Python 3
-class profile::python3 {
+class profile::python3http1 {
 
   class {'apache':
-    default_vhost => false,
     log_formats   => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
+    default_vhost => false,
   }
   class { 'python':
     version    => 'python3.5',

@@ -1,6 +1,5 @@
 # Run the eXist  Server container
 class exist::server {
-  include apache 
 
   $docker_run_dir = lookup('docker_run_dir', String)
   $exist_run_dir = "${docker_run_dir}/exist"
