@@ -2,7 +2,8 @@
 class profile::python3 {
 
   class {'apache':
-    log_formats => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
+    default_vhost => false,
+    log_formats   => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
   }
   class { 'python':
     version    => 'python3.5',
