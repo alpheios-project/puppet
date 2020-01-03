@@ -4,24 +4,34 @@ class profile::varnishlex::docker {
   include profile::ssl
 
   $docker_build_dir = lookup('docker_build_dir', String)
-  $build_dir = "${docker_build_dir}/lexdocker"
+  $build_dir = "${docker_build_dir}/lexvarnish"
 
   $docker_run_dir = lookup('docker_run_dir', String)
-  $run_dir = "${docker_run_dir}/lexdocker"
+  $run_dir = "${docker_run_dir}/lexvarnish"
 
-  file { $exist_run_dir:
+  file { $build_dir:
+    ensure => directory,
+  }
+  file { $run_dir:
     ensure => directory,
   }
 
-  vcsrepo { "${build_dir}":
-      ensure   => latest,
-      revision => 'master',
-      provider => git,
-      source   => 'https://github.com/alpheios-project/lex-docker.git',
-      notify  => Exec['remove-exist-image'],
+  file { "${build_dir}/default.vcl":
+    content => epp('profile/varnishlex/default.vcl.epp',{
+      'backend1' => 'repos-a.alpheios.net',
+      'backend2' => 'repos-b.alpheios.net',
+    })
+    notify  => Exec['remove-docker-image'],
   }
 
-  exec { 'remove-exist-image':
+  file { "${build_dir}/Dockerfile":
+    content => epp('profile/varnishlex/Dockerfile.epp',{
+      'cachesize' => '1G'
+    })
+    notify  => Exec['remove-docker-image'],
+  }
+
+  exec { 'remove-docker-image':
       command     => "docker rmi -f lexvarnish",
       path        => ['/bin', '/usr/bin'],
       refreshonly => true,
@@ -78,5 +88,4 @@ class profile::varnishlex::docker {
     dport  => ['80','443'],
     action => 'accept',
   }
-
 }
