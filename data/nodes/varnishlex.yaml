@@ -1,0 +1,7 @@
+---
+  classes:
+    - role::varnishlex
+  users:
+    'icinga':
+      comment: 'Icinga user'
+      uid: '1101'
