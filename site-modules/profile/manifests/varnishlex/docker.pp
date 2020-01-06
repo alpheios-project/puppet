@@ -6,13 +6,8 @@ class profile::varnishlex::docker {
   $docker_build_dir = lookup('docker_build_dir', String)
   $build_dir = "${docker_build_dir}/lexvarnish"
 
-  $docker_run_dir = lookup('docker_run_dir', String)
-  $run_dir = "${docker_run_dir}/lexvarnish"
 
   file { $build_dir:
-    ensure => directory,
-  }
-  file { $run_dir:
     ensure => directory,
   }
 
@@ -20,14 +15,14 @@ class profile::varnishlex::docker {
     content => epp('profile/varnishlex/default.vcl.epp',{
       'backend1' => 'repos-a.alpheios.net',
       'backend2' => 'repos-b.alpheios.net',
-    })
+    }),
     notify  => Exec['remove-docker-image'],
   }
 
   file { "${build_dir}/Dockerfile":
     content => epp('profile/varnishlex/Dockerfile.epp',{
       'cachesize' => '1G'
-    })
+    }),
     notify  => Exec['remove-docker-image'],
   }
 
@@ -41,7 +36,7 @@ class profile::varnishlex::docker {
 
   docker::image { 'lexvarnish':
     ensure     => present,
-    docker_dir => "${exist_build_dir/varnish}",
+    docker_dir => $build_dir,
     notify     => Docker::Run['lexvarnish'],
     force      => true,
   }
