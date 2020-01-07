@@ -1,6 +1,7 @@
 <%- | 
   String[1] $backend1,
   String[1] $backend2,
+  String[1] $ttl,
 | -%>
 vcl 4.0;
 import directors;
@@ -70,7 +71,10 @@ sub vcl_backend_response {
     set beresp.http.X-Cache-TTL = beresp.ttl;
   } else {
       # Varnish determined the object was cacheable
+      # override the server ttl which will be nonsense for eXist
+      set beresp.ttl = <%= $ttl %>s;
       set beresp.http.X-Cacheable = "YES";
+      set beresp.http.X-Cache-TTL = beresp.ttl;
   }
 }
 
