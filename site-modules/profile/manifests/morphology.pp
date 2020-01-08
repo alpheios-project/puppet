@@ -158,7 +158,7 @@ class profile::morphology {
 
   firewall { '100 Morphology Service Access':
     proto  => 'tcp',
-    dport  => ['80','443'],
+    dport  => ['80','443','5000'],
     action => 'accept',
   }
 
