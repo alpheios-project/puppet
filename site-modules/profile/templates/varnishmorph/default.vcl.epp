@@ -13,7 +13,7 @@ backend server1 {
   .first_byte_timeout = 30s;
   .between_bytes_timeout = 30s;
   .probe = {
-    .url = "/engine"
+    .url = "/engine";
     .timeout = 5s;
     .interval = 30s;
     .window = 5;
@@ -28,7 +28,7 @@ backend server2 {
   .first_byte_timeout = 30s;
   .between_bytes_timeout = 30s;
   .probe = {
-    .url = "/engine"
+    .url = "/engine";
     .timeout = 5s;
     .interval = 30s;
     .window = 5;
@@ -65,7 +65,7 @@ sub vcl_backend_response {
   # Add a grace in case the backend is down
   set beresp.grace = 1h;
 
-  if (beresp.ttl <= 0s) {
+  if (beresp.ttl <= 0s && beresp.status != 201) {
     # Varnish determined the object was not cacheable
     set beresp.http.X-Cacheable = "NO:Not Cacheable";
     set beresp.http.X-Cache-TTL = beresp.ttl;
