@@ -18,6 +18,19 @@ class profile::varnishlex::apache {
       "set Cache-Control 'public max-age=2592000'"
   ]
 
+  apache::vhost { 'lexdata':
+    port                => '8088',
+    servername          => 'lexdata.alpheios.net',
+    docroot             => '/var/www/html',
+    proxy_preserve_host => 'On',
+    proxy_pass          => [ $proxy_pass ],
+    headers             => $headers,
+    aliases   => [
+      { alias => '/lexdata',
+        path  => '/usr/local/lexdata',
+      }
+    ],
+  }
   apache::vhost { 'repos1-ssl':
     port                => '443',
     servername          => 'repos-v.alpheios.net',
@@ -39,7 +52,7 @@ class profile::varnishlex::apache {
 
   firewall { '101 SSL Access':
     proto  => 'tcp',
-    dport  => ['443'],
+    dport  => ['8088','443'],
     action => 'accept',
   }
 }
