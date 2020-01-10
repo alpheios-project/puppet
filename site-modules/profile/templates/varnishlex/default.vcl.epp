@@ -2,6 +2,7 @@
   String[1] $backend1,
   String[1] $backend2,
   String[1] $ttl,
+  String[1] $maxage,
 | -%>
 vcl 4.0;
 import directors;
@@ -73,6 +74,7 @@ sub vcl_backend_response {
       # Varnish determined the object was cacheable
       # override the server ttl which will be nonsense for eXist
       set beresp.ttl = <%= $ttl %>s;
+      set beresp.http.Cache-Control = "public max-age <%= $maxage %>";
       set beresp.http.X-Cacheable = "YES";
       set beresp.http.X-Cache-TTL = beresp.ttl;
   }

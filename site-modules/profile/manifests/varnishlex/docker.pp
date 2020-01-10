@@ -12,10 +12,11 @@ class profile::varnishlex::docker {
   }
 
   file { "${build_dir}/default.vcl":
-    content => epp('profile/varnishlex/default.vcl.epp',{
+    content      => epp('profile/varnishlex/default.vcl.epp',{
       'backend1' => 'repos-a.alpheios.net',
       'backend2' => 'repos-b.alpheios.net',
       'ttl'      => '15552000', # set the default cache life to 6 months
+      'maxage'  => '2592000', # set the max age for the client to 1 month
     }),
     notify  => Exec['remove-docker-image'],
   }
