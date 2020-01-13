@@ -36,6 +36,10 @@ backend server2 {
   }
 }
 
+sub vcl_hash {
+  hash_data(req.http.accept);
+}
+
 sub vcl_init {
   new bar = directors.round_robin();
   bar.add_backend(server1);
