@@ -79,6 +79,9 @@ sub vcl_backend_response {
       set beresp.ttl = <%= $ttl %>s;
       set beresp.http.X-Cacheable = "YES";
       set beresp.http.X-Cache-TTL = beresp.ttl;
+      set beresp.http.Access-Control-Allow-Origin = "*";
+      set beresp.http.Access-Control-Allow-Methods = "GET, OPTIONS";
+      set beresp.http.Access-Control-Allow-Headers = "Origin, Accept, Content-Type, X-Requested-With";
   }
 }
 
