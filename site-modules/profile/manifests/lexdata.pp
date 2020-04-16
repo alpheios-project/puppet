@@ -67,4 +67,18 @@ class profile::lexdata {
      source   => 'https://github.com/alpheios-project/lan.git'
    }
 
+   vcsrepo { '/usr/local/lexdata/majorplus':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/majorplus.git'
+   }
+
+   vcsrepo { '/usr/local/lexdata/mjm':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/mjm.git'
+   }
+
 }
