@@ -16,6 +16,13 @@ class profile::grammars {
      source   => 'https://github.com/alpheios-project/grammar-smyth.git'
    }
 
+   vcsrepo { '/var/www/grammar-allen-greenough':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/grammar-allen-greenough.git'
+   }
+
   $headers = [
       "set Access-Control-Allow-Origin '*'",
       "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'"
@@ -33,6 +40,9 @@ class profile::grammars {
        { alias => '/smyth',
          path  => '/var/www/grammar-smyth',
        },
+       { alias => '/allen-greenough',
+         path  => '/var/www/grammar-allen-greenough',
+       },
      ],
    }
 
@@ -47,6 +57,9 @@ class profile::grammars {
        },
        { alias => '/smyth',
          path  => '/var/www/grammar-smyth',
+       },
+       { alias => '/allen-greenough',
+         path  => '/var/www/grammar-allen-greenough',
        },
      ],
      ssl        => true,
