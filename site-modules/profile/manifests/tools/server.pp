@@ -5,7 +5,7 @@ class profile::tools::server {
   include tools::server
 
   class {'apache':
-    log_formats   => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %D'},
+    log_formats   => { combined => '%h %l %u %t \"%r\" %>s %b \"%{Content-Type}i\" \"%{Accepts}i\" \"%{Referer}i\" \"%{User-Agent}i\" %D'},
     default_vhost => false,
   }
 
@@ -21,7 +21,8 @@ class profile::tools::server {
 
   $headers = [
       "set Access-Control-Allow-Origin '*'",
-      "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'"
+      "set Access-Control-Allow-Methods 'GET, POST, OPTIONS'",
+      "set Access-Control-Allow-Headers '*'"
   ]
 
   apache::vhost { 'tools.alpheios.net':
