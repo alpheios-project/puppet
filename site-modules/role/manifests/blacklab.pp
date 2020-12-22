@@ -1,5 +1,5 @@
-class role::varnishlex {
+class role::blacklab {
   include profile::common
-  include profile::blackab::docker
+  include profile::blacklab::docker
   include profile::blacklab::apache
 }

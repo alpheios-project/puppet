@@ -32,18 +32,19 @@ class profile::blacklab::docker {
   docker::image { 'alpheios-blacklab':
     ensure     => present,
     docker_dir => $build_dir,
-    notify     => Docker::Run['alpheios-blacklab'],
+    notify     => Docker::Run['blacklab-instance'],
     force      => true,
   }
 
 
-  docker::run { 'alpheios-blacklab':
-    ensure  => present,
-    image   => "blacklab:latest",
-    restart => 'always',
+  docker::run { 'blacklab-instance':
+    ensure         => present,
+    image          => "alpheios-blacklab:latest",
     ports   => [
       "8888:8080",
     ],
+    restart_on_unhealthy  => true,
+    health_check_interval => 30,
   }
 
   firewall { '300 Blacklab Access':

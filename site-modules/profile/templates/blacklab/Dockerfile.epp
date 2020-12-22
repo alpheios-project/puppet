@@ -27,10 +27,13 @@ RUN ls /etc/blacklab
 RUN mkdir -p /data/blacklab/indexes && mkdir -p /jars/blacklab
 
 
+HEALTHCHECK --interval=5s --timeout=3s --retries=3 CMD curl -f http://localhost:8080 || exit 1
+
 # Completely noob with war and jar, I don't know how to access the lib from the war without unzipping
 RUN unzip ${CATALINA_HOME}/webapps/blacklab-server.war -d /jars/blacklab && \
 mv /jars/blacklab/WEB-INF/lib /jars/blacklab &&\
 mv lib/blacklab-${BL_VERSION}.jar ./blacklab.jar
 
 RUN java -cp "blacklab.jar" nl.inl.blacklab.tools.IndexTool create /data/blacklab/indexes/latin-texts /data/latin-lemmatized-texts-${RELEASE}/lemmatized/xml tei-msd;
+
 
