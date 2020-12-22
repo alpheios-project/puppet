@@ -1,6 +1,5 @@
 class profile::blacklab::docker {
-  include profile::docker::builder
-  include profile::docker::runner
+  include 'docker'
 
   $docker_build_dir = lookup('docker_build_dir', String)
   $build_dir = "${docker_build_dir}/blacklab"
@@ -41,6 +40,7 @@ class profile::blacklab::docker {
   docker::run { 'alpheios-blacklab':
     ensure  => present,
     image   => "blacklab:latest",
+    restart => 'always',
     ports   => [
       "8888:8080",
     ],
