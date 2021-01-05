@@ -18,6 +18,15 @@ class profile::blacklab::apache {
       "set Cache-Control 'public max-age=2592000'"
   ]
 
+  apache::vhost { 'blacklab':
+    port                => '80',
+    servername          => 'blacklab.alpheios.net',
+    docroot             => '/var/www/html',
+    suphp_engine        => 'off',
+    redirect_status     => 'permanent',
+    redirect_dest       => "https://blacklab.alpheios.net/"
+  }
+
   apache::vhost { 'blacklab-ssl':
     port                => '443',
     servername          => 'blacklab.alpheios.net',
@@ -34,7 +43,7 @@ class profile::blacklab::apache {
 
   firewall { '200 Blacklab SSL Access':
     proto  => 'tcp',
-    dport  => ['443'],
+    dport  => ['80','443'],
     action => 'accept',
   }
 }

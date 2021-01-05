@@ -20,7 +20,7 @@ WORKDIR /jars/blacklab
 
 ADD blacklab /etc/blacklab
 ADD blacklab-server-${BL_VERSION}.war ${CATALINA_HOME}/webapps/blacklab-server.war
-ADD corpus-frontend-${AS_VERSION}.war ${CATALINA_HOME}/webapps/corpus-frontend.war
+ADD corpus-frontend-${AS_VERSION}.war ${CATALINA_HOME}/webapps/ROOT.war
 
 RUN ls /etc/blacklab
 
@@ -35,6 +35,6 @@ mv /jars/blacklab/WEB-INF/lib /jars/blacklab &&\
 mv lib/blacklab-${BL_VERSION}.jar ./blacklab.jar
 
 RUN java -cp "blacklab.jar" -Xmx1024m nl.inl.blacklab.tools.IndexTool create /data/blacklab/indexes/latin-texts /data/latin-lemmatized-texts-${RELEASE}/lemmatized/xml tei-msd;
-RUN java -cp "blacklab.jar" -Xmx1024m nl.inl.blacklab.tools.IndexTool add /data/blacklab/indexes/latin-texts /data/latin-lemmatized-texts-${RELEASE}/lemmatized/xml/urn:cts:latinLit:phi0978.phi001.perseus-lat2.xml tei-msd;
+#RUN java -cp "blacklab.jar" -Xmx1024m nl.inl.blacklab.tools.IndexTool add /data/blacklab/indexes/latin-texts /data/latin-lemmatized-texts-${RELEASE}/lemmatized/xml/urn:cts:latinLit:phi0978.phi001.perseus-lat2.xml tei-msd;
 
 
