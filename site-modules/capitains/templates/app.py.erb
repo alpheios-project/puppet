@@ -12,13 +12,8 @@ d = "<%= @data_root %>"
 tic = TextInventoryCollection()
 latin = PrototypeTextInventory("urn:alpheios:latinLit", parent=tic)
 latin.set_label("Classical Latin", "eng")
-latin.set_label("Latin Classique", "fre")
-ara = PrototypeTextInventory("urn:alpheios:arabicLit", parent=tic)
-ara.set_label("Classical Arabic", "eng")
-ara.set_label("Arabe Classique", "fre")
 gc = PrototypeTextInventory("urn:alpheios:greekLit", parent=tic)
 gc.set_label("Ancient Greek", "eng")
-gc.set_label("Grec Ancien", "fre")
 
 dispatcher = CollectionDispatcher(tic)
 
@@ -26,12 +21,6 @@ dispatcher = CollectionDispatcher(tic)
 @dispatcher.inventory("urn:alpheios:latinLit")
 def dispatchLatinLit(collection, path=None, **kwargs):
     if collection.id.startswith("urn:cts:latinLit:"):
-        return True
-    return False
-
-@dispatcher.inventory("urn:alpheios:arabicLit")
-def dispatchGreekLit(collection, path=None, **kwargs):
-    if collection.id.startswith("urn:cts:arabicLit:"):
         return True
     return False
 
