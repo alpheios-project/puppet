@@ -34,5 +34,3 @@
       cibase: 'alpheios-project/cts-texts-greekLit'
     - name: 'cts-texts-latinLit'
       cibase: 'alpheios-project/cts-texts-latinLit'
-    - name: 'cts-texts-arabicLit'
-      cibase: 'alpheios-project/cts-texts-arabicLit'
