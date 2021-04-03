@@ -16,7 +16,7 @@ class profile::blacklab::docker {
 
   file { "${build_dir}/Dockerfile":
     content       => epp('profile/blacklab/Dockerfile.epp',{
-      'corpus_release' => '0.0.3',
+      'corpus_release' => '0.1.0',
     }),
     notify  => Exec['remove-blacklab-image'],
   }
