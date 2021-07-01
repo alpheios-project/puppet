@@ -113,4 +113,10 @@ class profile::lexdata {
      source   => 'https://github.com/alpheios-project/mjm.git'
    }
 
+   vcsrepo { '/usr/local/lexdata/paideia':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/paideia-glossary.git'
+   }
 }
