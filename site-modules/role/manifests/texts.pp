@@ -3,5 +3,4 @@ class role::texts {
   include profile::common
   include profile::python3
   include capitains
-  include profile::grammars
 }

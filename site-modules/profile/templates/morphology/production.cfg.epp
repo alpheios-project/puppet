@@ -4,7 +4,7 @@
   String[3] $aramorph_url,
   String[4] $wordsxml_path,
 | -%>
-ENGINES = "morpheusgrc,aramorph,whitakerLat,wleg,mgrcleg,hazm,amleg,traces"
+ENGINES = "morpheusgrc,aramorph,whitakerLat,wleg,mgrcleg,hazm,amleg,traces,sedra"
 ENGINES_MORPHEUSGRC_CNAME = "morphsvc.lib.engines.MorpheusLocalEngine.MorpheusLocalEngine"
 ENGINES_MGRCLEG_CNAME = "morphsvc.lib.engines.MorpheusLegacyLocalEngine.MorpheusLegacyLocalEngine"
 ENGINES_ARAMORPH_CNAME = "morphsvc.lib.engines.AramorphRemoteEngine.AramorphRemoteEngine"
@@ -13,6 +13,7 @@ ENGINES_WHITAKERLAT_CNAME = "morphsvc.lib.engines.WhitakersLocalEngine.Whitakers
 ENGINES_WLEG_CNAME = "morphsvc.lib.engines.WhitakersLegacyLocalEngine.WhitakersLegacyLocalEngine"
 ENGINES_HAZM_CNAME = "morphsvc.lib.engines.HazmEngine.HazmEngine"
 ENGINES_TRACES_CNAME = "morphsvc.lib.engines.TracesRemoteEngine.TracesRemoteEngine"
+ENGINES_SEDRA_CNAME = "morphsvc.lib.engines.SedraRemoteEngine.SedraRemoteEngine"
 PARSERS_MORPHEUS_PATH = "<%= $morpheus_path %>"
 PARSERS_MORPHEUS_STEMLIBDIR = "<%= $morpheus_stemlib_path %>"
 PARSERS_MORPHEUS_URI = "org.perseus:tools:morpheus.v1"
@@ -31,3 +32,6 @@ PARSERS_TRACES_RIGHTS = "Gǝʿǝz morphology parser (http://betamasaheft.eu/morp
 SERVICES_LEXICAL_ENTITY_SVC_GRC = None
 SERVICES_LEXICAL_ENTITY_SVC_LAT = None
 SERVICES_LEXICAL_ENTITY_BASE_URI = None 
+PARSERS_SEDRA_URI = "sedra@bethmardutho.org"
+PARSERS_SEDRA_REMOTE_URL = "https://sedra.bethmardutho.org/api/word/"
+PARSERS_SEDRA_RIGHTS = "Morphology provided by Sedra from the Beth Mardutho Project at The Syriac Institute, Georg A. Kiraz (General Editor), James W. Bennet (IT Manager)."

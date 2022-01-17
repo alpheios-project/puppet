@@ -1,5 +1,6 @@
 # Install Python 3
 class profile::python3 {
+  include profile::ssl
 
   class {'apache':
     default_vhost => false,

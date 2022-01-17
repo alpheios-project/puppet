@@ -4,6 +4,10 @@ class profile::lexdata {
      ensure => directory,
    }
 
+   file { '/usr/local/lexdata/v2':
+     ensure => directory,
+   }
+
    vcsrepo { '/usr/local/lexdata/ls':
      ensure   => latest,
      revision => 'master',
@@ -13,12 +17,26 @@ class profile::lexdata {
 
    vcsrepo { '/usr/local/lexdata/lsj':
      ensure   => latest,
-     revision => 'master',
+     revision => 'v1.0.0',
      provider => git,
      source   => 'https://github.com/alpheios-project/lsj.git'
    }
 
+   vcsrepo { '/usr/local/lexdata/v2/lsj':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/lsj.git'
+  }
+
    vcsrepo { '/usr/local/lexdata/ml':
+     ensure   => latest,
+     revision => 'v1.0.0',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/ml.git'
+   }
+
+   vcsrepo { '/usr/local/lexdata/v2/ml':
      ensure   => latest,
      revision => 'master',
      provider => git,
@@ -67,4 +85,38 @@ class profile::lexdata {
      source   => 'https://github.com/alpheios-project/lan.git'
    }
 
+   vcsrepo { '/usr/local/lexdata/majorplus':
+     ensure   => latest,
+     revision => 'v1.0.0',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/majorplus.git'
+   }
+
+   vcsrepo { '/usr/local/lexdata/v2/majorplus':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/majorplus.git'
+   }
+
+   vcsrepo { '/usr/local/lexdata/mjm':
+     ensure   => latest,
+     revision => 'v1.0.0',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/mjm.git'
+   }
+
+   vcsrepo { '/usr/local/lexdata/v2/mjm':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/mjm.git'
+   }
+
+   vcsrepo { '/usr/local/lexdata/paideia':
+     ensure   => latest,
+     revision => 'master',
+     provider => git,
+     source   => 'https://github.com/alpheios-project/paideia-glossary.git'
+   }
 }
