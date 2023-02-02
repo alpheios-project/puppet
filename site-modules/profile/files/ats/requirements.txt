@@ -16,7 +16,7 @@ six==1.11.0
 SQLAlchemy==1.2.5
 tzlocal==1.5.1
 urllib3==1.22
-Werkzeug==0.14.1
+Werkzeug==0.15.5
 flask-cors==3.0.3
 gunicorn==19.4.5
 flask-sslify==0.1.5
