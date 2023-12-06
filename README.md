@@ -8,7 +8,7 @@ However, there are a few exceptions that require manual steps.
 
 ## Lexicon Services
 
-The eXist based lexicon services (for Alpheios Full Definitions) are packaged in Docker containers built from the https://github.com/alpheios-project/lex-docker repository. This Dockerfile in turn pulls from the individual GitHub repositories for the various lexicons (e.g. https://github.com/alpheios-project/lsj etc.).  So, pappy will pickup changes to the Dockerfile repo, but unless the Dockerfile changes to pull a different tag of a lexicon release (and right now we don't use tagged releases of the lexicons), it won't pickup fixes to the lexicon xml.
+The eXist based lexicon services (for Alpheios Full Definitions) are packaged in Docker containers built from the https://github.com/alpheios-project/lex-docker repository. This Dockerfile in turn pulls from the individual GitHub repositories for the various lexicons (e.g. https://github.com/alpheios-project/lsj etc.).  So, papply will pickup changes to the Dockerfile repo, but unless the Dockerfile changes to pull a different tag of a lexicon release (and right now we don't use tagged releases of the lexicons), it won't pickup fixes to the lexicon xml.
 
 So, if you change the xml of a lexicon file, you need to force a rebuild the Docker image.  The simplest way to do this is to ssh into all of the EC2 instances which are deployed as the `repos` host, and run the following commands
 
@@ -33,3 +33,21 @@ papply
 
 (for some reason, on the varnish instances the docker container doesn't get restarted automatically. Running `papply` will restart it).
 
+
+## Puppet Management
+
+## Hiera
+
+The [hiera.yaml](https://github.com/alpheios-project/puppet/blob/master/hiera.yaml) defines the files which contain
+the hiera configuration settings for the puppet manifests and the order in which they are applied.
+
+The majority of the settings can be found in [common.yaml](https://github.com/alpheios-project/puppet/blob/master/data/common.yaml). 
+
+Sensitive information is encrypted in [secret.eyaml](https://github.com/alpheios-project/puppet/blob/master/data/secret.eyaml).  To edit this file you must have [heira-eyaml](https://puppet.com/blog/encrypt-your-data-using-hiera-eyaml) and the Alpheios GPG key installed.  The easiest way to do this is from one the puppetized instances, 
+using the [eyaml_edit](https://github.com/alpheios-project/puppet/blob/master/tools/eyaml_edit) script:
+
+```
+sudo su - 
+cd /etc/pupptelabs/code/environments/production
+sudo tools/eyaml_edit data/secret.eyaml
+```

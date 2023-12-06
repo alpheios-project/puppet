@@ -10,14 +10,21 @@
       uid: '1011'
       sshkeys:
         - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDkz8ot0toPO5CaLsSTn08ahDvCkRD6rhwfyUBRVKIlb4vT/U1kIeKOg+hDyHz3U0Idcrkjcg9C7ul0n/3QS5qSDvzYpY5zdYvkKJO/LMgBT4pXKZ06YYEElnmf7j0D3Rp+Sphh9WthxyTnAXTREkPwABOVV8DkAUYV+8niM+TlZyu7jlLkuamRsECuLA2etAl7Rbs5jwW5orL0j1d7Pav2GfsASHlfax3cuhrhPBvCL5C/KPqEOs2SdIoPumMedKcE44qb5vxHq/AnNOCBio/zLWc/FfyHAEQ3UDRQIZJknKN8tNHl+FPE0PkOwlDnD7XzOE8BzNITWgLMZLUWCE7x kirlat Alpheios'
+    'irina060981':
+      comment: 'Irina'
+      uid: '1020'
+      sshkeys:
+        - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfGcjEfaiZrfvuP3K31EIxSmx6DfQBrwh/OKUZUstNw7J5YNSpGQxRYVr+wSRcxCSK1sjxRX21BV4YJI5Ic8kCyGVlxhB16uwSDO6/EGJn6rDJ9q91NMxDsuLCFWbJkNcP06JlE0g42eVhlhfCE0IBR5JKnHDJKYEYqtlwcxHtv2xhIcNwQYA9N3peIaIuLxi1cD2QN323pNzyguFGDKATj81QnAUOGMCat2kYt3QNh5FoAYaJJln1XA0P/ZIroVhb/jYQQkYIei2ch/OacNe0fvhC56nKlgCPgJNJBYKJpkcDSOSOhB2CZ7uXm3viAAA4+/4SVJ8zt91CLUcqe/D1 irish@DESKTOP-R8GULOO'
   allow_users:
     - 'balmas'
     - 'vagrant'
     - 'kirlat'
+    - 'irina060981'
   sudoers:
     - 'balmas'
     - 'kirlat'
     - 'vagrant'
+    - 'irina060981'
   site::ip_address: ''
   site::admin_email: ''
   slack_webhook_url: ''
